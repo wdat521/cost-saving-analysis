@@ -49,6 +49,15 @@ The dataframe 'cs' has 2120 rows and 15 columns. It is also notable that the col
 ## Format Checking and Standardization
 - No empty values in columns circuit_id, a_end, z_end, product_type, supplier, start_date, monthly_recurring_cost, contract_termn_months, decom_status, and utilization_pct. Values are also in the smae format. Note that circuit_id doesn't have to be unique.
 
+- The categories for column billing_status is shown as: 'ACTIVE BILLING', 'BILLING', 'Not Billed', 'billing'. Categories 'ACTIVE BILLING', 'BILLING', and , 'billing' are the same in meaning.
+
+<img width="445" height="86" alt="image" src="https://github.com/user-attachments/assets/d69ad234-7ede-4e8e-bb0a-c79c16c87194" />
+
+- Standardizing the billing_status column, a new column called clean_billing_status is appended to the dataframe. Column billing_status can be removed.
+
+<img width="343" height="235" alt="image" src="https://github.com/user-attachments/assets/2b18db38-609b-4dad-9061-69ea37dfba6e" />
+<img width="1380" height="372" alt="image" src="https://github.com/user-attachments/assets/d770a8fb-bbec-44db-8518-9aaf77c859c8" />
+
 - A reclaim or credit note can be expected if the circuit was reqeusted for termination, the vendor acknowledged request, yet we are still being billed. Hence looking at the dataset, the circuit has to be in billing state, decommissioned, and the service it is used for is inactive. Upon checking, the columns reclaim and reclaim_total are logical.
 
 `cs[(cs['reclaim']) == 'YES'].head()`
@@ -60,15 +69,6 @@ The dataframe 'cs' has 2120 rows and 15 columns. It is also notable that the col
 |194|CKT-07283|3658|Paris DC1|Frankfurt DC1|Internet DIA|Verizon|2019-06-15|13-06-24|48|billing|DECOM|Inactive|YES|8770\.0|40|
 |314|CKT-08592|390|London DC2|Frankfurt DC1|Cross Connect|NTT|05-08-17|NaN|48|BILLING|DECOM|Inactive|YES|2320\.0|76|
 |327|CKT-08965|5000|Singapore DC1|Singapore DC1|Metro Fiber|NTT|2018/05/26|NaN|60|ACTIVE BILLING|DECOM|Inactive|YES|1500\.0|22|
-
-- The categories for column billing_status is shown as: 'ACTIVE BILLING', 'BILLING', 'Not Billed', 'billing'. Categories 'ACTIVE BILLING', 'BILLING', and , 'billing' are the same in meaning.
-
-<img width="445" height="86" alt="image" src="https://github.com/user-attachments/assets/d69ad234-7ede-4e8e-bb0a-c79c16c87194" />
-
-- Standardizing the billing_status column, a new column called clean_billing_status is appended to the dataframe. Column billing_status can be removed.
-
-<img width="343" height="235" alt="image" src="https://github.com/user-attachments/assets/2b18db38-609b-4dad-9061-69ea37dfba6e" />
-<img width="1380" height="372" alt="image" src="https://github.com/user-attachments/assets/d770a8fb-bbec-44db-8518-9aaf77c859c8" />
 
 - Checking the service_status column, the categories 'Active' and 'active' are the same. To fix this:
 
@@ -83,24 +83,24 @@ Filling in empty end_date by adding the contract terms in monrth to the start da
 
 <img width="822" height="490" alt="image" src="https://github.com/user-attachments/assets/26322b21-4279-4c4d-b6d3-5a4e9d6188e1" />
 
-# Analyses
+## 🔍 Analyses
 
-## Cost-saving Objective I: Identify circuits that were requested for termination but are still being billed (services that are inactive, decommissioned, but are still being billed).
+### Cost-saving Objective I: Identify circuits that were requested for termination but are still being billed (services that are inactive, decommissioned, but are still being billed).
 Flagging rows that are cost savings (decom_status = DECOM, billing_status = BILLING, service_status = INACTIVE)
 
 <img width="1396" height="726" alt="image" src="https://github.com/user-attachments/assets/9de8228b-4d9c-4499-a88d-12f93171a620" />
 
-## Cost-saving Objective II: identify circuits that are potentially duplicate routes (the same product type, and A and Z locations).
+### Cost-saving Objective II: identify circuits that are potentially duplicate routes (the same product type, and A and Z locations).
 decom_status = ACTIVE, clean_billing_status = BILLING, service_status = ACTIVE and PROVISIONING)
 
 <img width="1393" height="664" alt="image" src="https://github.com/user-attachments/assets/b6cb0c8f-0d3b-4966-9005-019a9ad74465" />
 
-## Cost-saving Objective III: identify circuits that are underused (utilization percentage > 20%).
+### Cost-saving Objective III: identify circuits that are underused (utilization percentage > 20%).
 Flagging underused circuits with less than 20% utilization rate
 
 <img width="1379" height="439" alt="image" src="https://github.com/user-attachments/assets/c788e00a-431d-4fe9-ae47-11b2b932a04c" />
 
-## Cost-saving Objective IV: identify out of term contracts but are still being billed to reassess usability.
+### Cost-saving Objective IV: identify out of term contracts but are still being billed to reassess usability.
 
 <img width="859" height="472" alt="image" src="https://github.com/user-attachments/assets/2b8717ef-813d-4028-9a64-0afd305cc73f" />
 
