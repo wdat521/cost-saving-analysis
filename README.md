@@ -28,8 +28,8 @@ Below are strategies that could generate cost savings:
   * reclaim_total - total reclaim out of the cost saving project
   * utilization_pct - utilized percentage of the circuit capacity
 
-## ⚙️ Methodology##
-###Tools Used:
+## ⚙️ Methodology
+Tools Used:
 * Python for data cleaning, data imputation, and exploratory data analysis
 * Power BI for visualization
 
@@ -51,7 +51,15 @@ The dataframe 'cs' has 2120 rows and 15 columns. It is also notable that the col
 
 - A reclaim or credit note can be expected if the circuit was reqeusted for termination, the vendor acknowledged request, yet we are still being billed. Hence looking at the dataset, the circuit has to be in billing state, decommissioned, and the service it is used for is inactive. Upon checking, the columns reclaim and reclaim_total are logical.
 
-<img width="1385" height="539" alt="Screenshot 2026-03-18 025726" src="https://github.com/user-attachments/assets/a8337c5c-b43d-48a0-9dcf-041e467d7e3a" />
+`cs[(cs['reclaim']) == 'YES'].head()`
+
+|index|circuit\_id|monthly\_recurring\_cost|a\_end|z\_end|product\_type|supplier|start\_date|end\_date|contract\_term\_months|billing\_status|decom\_status|service\_status|reclaim|reclaim\_total|utilization\_pct|
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+|44|CKT-00705|2565|Singapore DC1|London DC1|Wave|Verizon|12-02-17|2019/02/12|36|billing|DECOM|Inactive|YES|30780\.0|49|
+|84|CKT-09044|300|Ashburn DC1|New York DC1|Fiber|BT|2019-11-28|NaN|36|BILLING|DECOM|Inactive|YES|12957\.0|79|
+|194|CKT-07283|3658|Paris DC1|Frankfurt DC1|Internet DIA|Verizon|2019-06-15|13-06-24|48|billing|DECOM|Inactive|YES|8770\.0|40|
+|314|CKT-08592|390|London DC2|Frankfurt DC1|Cross Connect|NTT|05-08-17|NaN|48|BILLING|DECOM|Inactive|YES|2320\.0|76|
+|327|CKT-08965|5000|Singapore DC1|Singapore DC1|Metro Fiber|NTT|2018/05/26|NaN|60|ACTIVE BILLING|DECOM|Inactive|YES|1500\.0|22|
 
 - The categories for column billing_status is shown as: 'ACTIVE BILLING', 'BILLING', 'Not Billed', 'billing'. Categories 'ACTIVE BILLING', 'BILLING', and , 'billing' are the same in meaning.
 
