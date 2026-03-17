@@ -1,8 +1,8 @@
-# Cost Saving Analysis
+# 📌 Cost Saving Analysis
 A cost analysis of  telecommunications inventory (cables, DIA, etc.) focusing on cutting unnecessary costs.
 
 
-# <img width="612" height="612" alt="image" src="https://github.com/user-attachments/assets/700e1f67-f7aa-43d8-80ef-1158ee83e995" /> Problem Statement 
+## 🧩 The Challenge 
 The company is spending roughly 30% of its annual budget for inventory networking services and equipment management. Due to the 3-5% price increase of our suppliers, we want to strategically reduce the inventory budget to 10%, factoring in capital, storage, insurance, and obsolescence. By the end of 2026, we want to save at least 1M USD.
 
 Below are strategies that could generate cost savings:
@@ -11,7 +11,7 @@ Below are strategies that could generate cost savings:
   * Identify circuits that are underused (utilization percentage < 20%).
   * Identify out of term contracts but are still being billed to reassess usability.
 
-# <img width="1200" height="1200" alt="image" src="https://github.com/user-attachments/assets/9cf03a23-22f1-45bc-9ec7-885efa00bac2" /> Dataset
+## 📊 Dataset
   * circuit_id - service reference of circuits
   * monthly_recurring_cost - unit price
   * a_end - A location
@@ -28,8 +28,8 @@ Below are strategies that could generate cost savings:
   * reclaim_total - total reclaim out of the cost saving project
   * utilization_pct - utilized percentage of the circuit capacity
 
-# <img width="200" height="200" alt="image" src="https://github.com/user-attachments/assets/5e73b302-e555-445d-a7a7-509bdbf41b1f" /> Methodology
-## Tools Used:
+## ⚙️ Methodology##
+###Tools Used:
 * Python for data cleaning, data imputation, and exploratory data analysis
 * Power BI for visualization
 
@@ -99,3 +99,7 @@ Flagging underused circuits with less than 20% utilization rate
 Upon further look, inconsistencies are detected in the end_date and contract_term_months columns.
 As an example, circuit CKT-07237 start date was on 2022-11-13, with a 36 contract term in months. Its contract should have ended on 2025-11-13, but it shows 2027-12-11 instead.
 Further investigation on contract terms is highly recommended.
+
+## 💡 Insights
+
+## 📈 Recommendations
