@@ -32,11 +32,8 @@ Below are strategies that could generate cost savings:
 Tools Used:
 * Python for data cleaning, data imputation, and exploratory data analysis
 * Power BI for visualization
-
-## Exploring Dataframe Dimension
-The dataframe 'cs' has 2120 rows and 15 columns. It is also notable that the column end_date has empty values. Below is also the first five rows of the dataframe.
   
-# DataFrame Overview
+## DataFrame Overview
 
 **Type:** `pandas.core.frame.DataFrame`
 
@@ -61,6 +58,7 @@ The dataframe 'cs' has 2120 rows and 15 columns. It is also notable that the col
 df: float64(1), int64(3), object(11)
 Memory Usage: approximately **248.6 KB**
 
+First five rows of the dataframe 'cs':
 |index|circuit\_id|monthly\_recurring\_cost|a\_end|z\_end|product\_type|supplier|start\_date|end\_date|contract\_term\_months|billing\_status|decom\_status|service\_status|reclaim|reclaim\_total|utilization\_pct|
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 |0|CKT-07237|2824|Dallas DC1|London DC2|Internet DIA|Orange|13-11-22|12-11-27|36|BILLING|PENDING DECOM|Provisioning|NaN|NaN|34|
@@ -69,42 +67,109 @@ Memory Usage: approximately **248.6 KB**
 |3|CKT-07997|4564|Zurich DC1|Amsterdam DC1|Metro Fiber|BT|28-01-21|NaN|36|BILLING|ACTIVE|Pending Disconnect|NaN|NaN|94|
 |4|CKT-03339|150|Tokyo DC1|London DC1|Cross Connect|Lumen|2021/09/24|23-09-26|60|BILLING|PENDING DECOM|Provisioning|NaN|NaN|61|
 
-## Format Checking and Standardization
+## Data Preprocessing
 - No empty values in columns circuit_id, a_end, z_end, product_type, supplier, start_date, monthly_recurring_cost, contract_termn_months, decom_status, and utilization_pct. Values are also in the smae format. Note that circuit_id doesn't have to be unique.
 
 - The categories for column billing_status is shown as: 'ACTIVE BILLING', 'BILLING', 'Not Billed', 'billing'. Categories 'ACTIVE BILLING', 'BILLING', and , 'billing' are the same in meaning.
 
-<img width="445" height="86" alt="image" src="https://github.com/user-attachments/assets/d69ad234-7ede-4e8e-bb0a-c79c16c87194" />
+`sorted(cs['billing_status'].unique())`
+['ACTIVE BILLING', 'BILLING', 'Not Billed', 'billing']
 
 - Standardizing the billing_status column, a new column called clean_billing_status is appended to the dataframe. Column billing_status can be removed.
+`standardized = []
 
-<img width="343" height="235" alt="image" src="https://github.com/user-attachments/assets/2b18db38-609b-4dad-9061-69ea37dfba6e" />
-<img width="1380" height="372" alt="image" src="https://github.com/user-attachments/assets/d770a8fb-bbec-44db-8518-9aaf77c859c8" />
+Standardizing format: billing_status:
+`for c in cs['billing_status']:
+    if "billing" in c.lower():
+        standardized.append("BILLING")
+    else:
+        standardized.append("NOT BILLED")
+cs['clean_billing_status'] = standardized
+cs.head()`
+
+Removing the column billing_status as it is replaced by column clean_billing_status
+`cs.drop(columns="billing_status", inplace=True)
+cs.head()`
+
+|index|circuit\_id|monthly\_recurring\_cost|a\_end|z\_end|product\_type|supplier|start\_date|end\_date|contract\_term\_months|decom\_status|service\_status|reclaim|reclaim\_total|utilization\_pct|clean\_billing\_status|
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+|0|CKT-07237|2824|Dallas DC1|London DC2|Internet DIA|Orange|13-11-22|12-11-27|36|PENDING DECOM|Provisioning|NaN|NaN|34|BILLING|
+|1|CKT-07085|350|Frankfurt DC1|Zurich DC1|Fiber|BT|2020-01-18|16-01-25|24|DECOM|Provisioning|NaN|NaN|75|NOT BILLED|
+|2|CKT-02822|1316|London DC1|Tokyo DC1|Wave|Orange|2021/11/16|2024-11-15|36|DECOM|Active|NaN|NaN|55|BILLING|
+|3|CKT-07997|4564|Zurich DC1|Amsterdam DC1|Metro Fiber|BT|28-01-21|NaN|36|ACTIVE|Pending Disconnect|NaN|NaN|94|BILLING|
+|4|CKT-03339|150|Tokyo DC1|London DC1|Cross Connect|Lumen|2021/09/24|23-09-26|60|PENDING DECOM|Provisioning|NaN|NaN|61|BILLING|
 
 - A reclaim or credit note can be expected if the circuit was reqeusted for termination, the vendor acknowledged request, yet we are still being billed. Hence looking at the dataset, the circuit has to be in billing state, decommissioned, and the service it is used for is inactive. Upon checking, the columns reclaim and reclaim_total are logical.
 
-`cs[(cs['reclaim']) == 'YES'].head()`
+`reclaim_columns = ['circuit_id','decom_status', 'service_status','clean_billing_status']
+reclaim_condition = cs['reclaim'] == 'YES' `
 
-|index|circuit\_id|monthly\_recurring\_cost|a\_end|z\_end|product\_type|supplier|start\_date|end\_date|contract\_term\_months|billing\_status|decom\_status|service\_status|reclaim|reclaim\_total|utilization\_pct|
-|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-|44|CKT-00705|2565|Singapore DC1|London DC1|Wave|Verizon|12-02-17|2019/02/12|36|billing|DECOM|Inactive|YES|30780\.0|49|
-|84|CKT-09044|300|Ashburn DC1|New York DC1|Fiber|BT|2019-11-28|NaN|36|BILLING|DECOM|Inactive|YES|12957\.0|79|
-|194|CKT-07283|3658|Paris DC1|Frankfurt DC1|Internet DIA|Verizon|2019-06-15|13-06-24|48|billing|DECOM|Inactive|YES|8770\.0|40|
-|314|CKT-08592|390|London DC2|Frankfurt DC1|Cross Connect|NTT|05-08-17|NaN|48|BILLING|DECOM|Inactive|YES|2320\.0|76|
-|327|CKT-08965|5000|Singapore DC1|Singapore DC1|Metro Fiber|NTT|2018/05/26|NaN|60|ACTIVE BILLING|DECOM|Inactive|YES|1500\.0|22|
+`reclaim_df = cs.loc[reclaim_condition, reclaim_columns]
+reclaim_df.head()`
+
+|index|circuit\_id|decom\_status|service\_status|clean\_billing\_status|
+|---|---|---|---|---|
+|44|CKT-00705|DECOM|Inactive|BILLING|
+|84|CKT-09044|DECOM|Inactive|BILLING|
+|194|CKT-07283|DECOM|Inactive|BILLING|
+|314|CKT-08592|DECOM|Inactive|BILLING|
+|327|CKT-08965|DECOM|Inactive|BILLING|
 
 - Checking the service_status column, the categories 'Active' and 'active' are the same. To fix this:
 
-<img width="575" height="107" alt="image" src="https://github.com/user-attachments/assets/edf06665-75a8-453c-8c8c-2567175bdaff" />
-  
+`# Format checking: service_status
+sorted(cs.service_status.unique())`
+
+['Active', 'Inactive', 'Pending Disconnect','Provisioning', 'Suspended', 'active']
+
+`cs['service_status'] = cs.service_status.str.upper()
+sorted(cs.service_status.unique())`
+
+['ACTIVE', 'INACTIVE', 'PENDING DISCONNECT', 'PROVISIONING', 'SUSPENDED']
+
 - It is notable that the columns start_date and end_date are not uniform in format. 
 
-<img width="823" height="355" alt="image" src="https://github.com/user-attachments/assets/aaf8b3ed-6ee4-4964-b486-a1b902b2d634" />
-<img width="1400" height="481" alt="image" src="https://github.com/user-attachments/assets/6b13b22b-0680-4c22-b7d5-bdcbe3a24c89" />
+`cs['start_date'] = pd.to_datetime(cs['start_date'])
+cs['end_date'] = pd.to_datetime(cs['end_date'])
+cs.head()`
 
-Filling in empty end_date by adding the contract terms in monrth to the start date.
+|index|start\_date|end\_date|
+|---|---|---|
+|0|2022-11-13 00:00:00|2027-12-11 00:00:00|
+|1|2020-01-18 00:00:00|2025-01-16 00:00:00|
+|2|2021-11-16 00:00:00|2024-11-15 00:00:00|
+|3|2021-01-28 00:00:00|NaT|
+|4|2021-09-24 00:00:00|2026-09-23 00:00:00|
 
-<img width="822" height="490" alt="image" src="https://github.com/user-attachments/assets/26322b21-4279-4c4d-b6d3-5a4e9d6188e1" />
+- Filling in empty end_date by adding the contract terms in monrth to the start date.
+
+`blank_end_date = cs['end_date'].isna()`
+
+`cs.loc[blank_end_date, 'end_date'] = cs.loc[blank_end_date].apply(
+    lambda x: x['start_date'] + pd.DateOffset(months=x['contract_term_months']),
+    axis=1
+)`
+
+`cs['end_date'].isna()`
+
+| Index | End Date | 
+|-------|----------|
+| 0     | False    |
+| 1     | False    |
+| 2     | False    |
+| 3     | False    |
+| 4     | False    |
+| ...   | ...      |
+| 2115  | False    |
+| 2116  | False    |
+| 2117  | False    |
+| 2118  | False    |
+| 2119  | False    |
+
+**DataFrame Dimensions:**
+- Rows: 2120
+- Columns: 1
+- Data Type: bool
 
 ## 🔍 Analyses
 
