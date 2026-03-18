@@ -36,7 +36,30 @@ Tools Used:
 ## Exploring Dataframe Dimension
 The dataframe 'cs' has 2120 rows and 15 columns. It is also notable that the column end_date has empty values. Below is also the first five rows of the dataframe.
   
-<img width="460" height="577" alt="image" src="https://github.com/user-attachments/assets/75b566af-faf0-4d69-a9cd-36907489e2b4" />
+# DataFrame Overview
+
+**Type:** `pandas.core.frame.DataFrame`
+
+**Range Index:** 2120 entries, from 0 to 2119
+
+## Data Columns (Total 15 columns):
+
+| # | Column | Non-Null Count | Dtype |
+|---|---------|----------------|--------|
+| 0 | circuit_id | 2120 non-null | object |
+| 1 | monthly_recurring_cost | 2120 non-null | int64 |
+| 2 | a_end | 2120 non-null | object |
+| 3 | z_end | 2120 non-null | object |
+| 4 | product_type | 2120 non-null | object |
+| 5 | supplier | 2120 non-null | object |
+| 6 | start_date | 2120 non-null | object |
+| 7 | end_date | 1598 non-null | object |
+| 8 | contract_term_months | 2120 non-null | int64 |
+| 9 | billing_status | 2120 non-null | object |
+|10| decom_status           |  2120 non-null   | object|
+|11| service_status           |  2120   non-null                                                │
+df: float64(1), int64(3), object(11)
+Memory Usage: approximately **248.6 KB**
 
 |index|circuit\_id|monthly\_recurring\_cost|a\_end|z\_end|product\_type|supplier|start\_date|end\_date|contract\_term\_months|billing\_status|decom\_status|service\_status|reclaim|reclaim\_total|utilization\_pct|
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
