@@ -1,39 +1,16 @@
 # 📌 Cost Saving Analysis
-A cost analysis of  telecommunications inventory (cables, DIA, etc.) focusing on cutting unnecessary costs.
-
+This project focuses on identifying unnecessary networking inventory costs.
 
 ## 🧩 The Challenge 
 The company is spending roughly 30% of its annual budget for inventory networking services and equipment management. Due to the 3-5% price increase of our suppliers, we want to strategically reduce the inventory budget to 10%, factoring in capital, storage, insurance, and obsolescence. By the end of 2026, we want to save at least 1M USD.
 
 Below are strategies that could generate cost savings:
-  * Identify circuits that were requested for termination but are still being billed (services that are inactive, decommissioned, but are still being billed). 
+  * Identify circuits that were requested for termination but are still being billed (customer services that are inactive, decommissioned inventory, yet still being billed by the vendor). 
   * Identify circuits that are potentially duplicate routes (the same product type, and A and Z locations).
-  * Identify circuits that are underused (utilization percentage < 20%).
-  * Identify out of term contracts but are still being billed to reassess usability.
+  * Identify circuits that are underused (utilization percentage > 20%).
+  * Identify out of term contracts but are still being billed.
 
-## 📊 Dataset
-  * circuit_id - service reference of circuits
-  * monthly_recurring_cost - unit price
-  * a_end - A location
-  * z_end - Z location
-  * product_type - whether it's a Cross Connect, Dark Fiber, Fiber, Internet DIA, Metro Fiber, Wave
-  * supplier
-  * start_date - contract start date
-  * end_date - contract end date
-  * contract_term_months - contract length in months
-  * billing_status - whether the circuits are still being billed or not
-  * decom_status - decommission status of circuits
-  * service_status - 
-  * reclaim - eligibility for reclaim or credit note
-  * reclaim_total - total reclaim out of the cost saving project
-  * utilization_pct - utilized percentage of the circuit capacity
-
-## ⚙️ Methodology
-Tools Used:
-* Python for data cleaning, data imputation, and exploratory data analysis
-* Power BI for visualization
-  
-## DataFrame Overview
+## 📊 Dataframe 'cs' Overview
 
 **Type:** `pandas.core.frame.DataFrame`
 
@@ -57,6 +34,7 @@ Tools Used:
 |11 | service_status | 2120 non-null │ object|
 df: float64(1), int64(3), object(11)
 
+
 First five rows of the dataframe ```cs```:
 |index|circuit\_id|monthly\_recurring\_cost|a\_end|z\_end|product\_type|supplier|start\_date|end\_date|contract\_term\_months|billing\_status|decom\_status|service\_status|reclaim|reclaim\_total|utilization\_pct|
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
@@ -66,37 +44,33 @@ First five rows of the dataframe ```cs```:
 |3|CKT-07997|4564|Zurich DC1|Amsterdam DC1|Metro Fiber|BT|28-01-21|NaN|36|BILLING|ACTIVE|Pending Disconnect|NaN|NaN|94|
 |4|CKT-03339|150|Tokyo DC1|London DC1|Cross Connect|Lumen|2021/09/24|23-09-26|60|BILLING|PENDING DECOM|Provisioning|NaN|NaN|61|
 
-## Data Preprocessing
+
+## ⚙️ Methodology
+Tools Used:
+* Python for data cleaning, data imputation, and exploratory data analysis
+* Power BI for visualization
+
+### Data Preprocessing
 - No empty values in columns circuit_id, a_end, z_end, product_type, supplier, start_date, monthly_recurring_cost, contract_termn_months, decom_status, and utilization_pct. Values are also in the smae format. Note that circuit_id doesn't have to be unique.
 
-- The categories for column billing_status is shown as: 'ACTIVE BILLING', 'BILLING', 'Not Billed', 'billing'. Categories 'ACTIVE BILLING', 'BILLING', and , 'billing' are the same in meaning.
+- The categories for column billing_status is shown as: 'ACTIVE BILLING', 'BILLING', 'Not Billed', 'billing'. Categories 'ACTIVE BILLING', 'BILLING', and , 'billing' are the same in meaning. 
 
+  `sorted(cs['billing_status'].unique())`
 
-`sorted(cs['billing_status'].unique())`
+  Standardizing the billing_status column, a new column called clean_billing_status is appended to the dataframe. Column billing_status can be removed.
+  `standardized = []
+  for c in cs['billing_status']:
+   if "billing" in c.lower():
+       standardized.append("BILLING")
+   else:
+       standardized.append("NOT BILLED")
+  cs['clean_billing_status'] = standardized
+  cs.head()`
 
+  Removing the column billing_status as it is replaced by column clean_billing_status
 
-['ACTIVE BILLING', 'BILLING', 'Not Billed', 'billing']
-
-
-- Standardizing the billing_status column, a new column called clean_billing_status is appended to the dataframe. Column billing_status can be removed.
-
-
-`standardized = []`
-
-`for c in cs['billing_status']:`
-   ` if "billing" in c.lower():`
-       ` standardized.append("BILLING")`
-   ` else:`
-       ` standardized.append("NOT BILLED")`
-       
-`cs['clean_billing_status'] = standardized`
-`cs.head()`
-
-Removing the column billing_status as it is replaced by column clean_billing_status
-
-
-`cs.drop(columns="billing_status", inplace=True)`
-`cs.head()`
+ `cs.drop(columns="billing_status", inplace=True)
+  cs.head()`
 
 
 |index|circuit\_id|monthly\_recurring\_cost|a\_end|z\_end|product\_type|supplier|start\_date|end\_date|contract\_term\_months|decom\_status|service\_status|reclaim|reclaim\_total|utilization\_pct|clean\_billing\_status|
@@ -109,11 +83,11 @@ Removing the column billing_status as it is replaced by column clean_billing_sta
 
 - A reclaim or credit note can be expected if the circuit was reqeusted for termination, the vendor acknowledged request, yet we are still being billed. Hence looking at the dataset, the circuit has to be in billing state, decommissioned, and the service it is used for is inactive. Upon checking, the columns reclaim and reclaim_total are logical.
 
-`reclaim_columns = ['circuit_id','decom_status', 'service_status','clean_billing_status']`
-`reclaim_condition = cs['reclaim'] == 'YES' `
+ `reclaim_columns = ['circuit_id','decom_status', 'service_status','clean_billing_status']
+  reclaim_condition = cs['reclaim'] == 'YES' `
 
-`reclaim_df = cs.loc[reclaim_condition, reclaim_columns]`
-`reclaim_df.head()`
+ `reclaim_df = cs.loc[reclaim_condition, reclaim_columns]
+  reclaim_df.head()`
 
 |index|circuit\_id|decom\_status|service\_status|clean\_billing\_status|
 |---|---|---|---|---|
@@ -125,21 +99,21 @@ Removing the column billing_status as it is replaced by column clean_billing_sta
 
 - Checking the service_status column, the categories 'Active' and 'active' are the same. To fix this:
 
-`# Format checking: service_status`
-`sorted(cs.service_status.unique())`
+ `# Format checking: service_status
+ sorted(cs.service_status.unique())`
 
-['Active', 'Inactive', 'Pending Disconnect','Provisioning', 'Suspended', 'active']
+ ['Active', 'Inactive', 'Pending Disconnect','Provisioning', 'Suspended', 'active']
 
-`cs['service_status'] = cs.service_status.str.upper()`
-`sorted(cs.service_status.unique())`
+ `cs['service_status'] = cs.service_status.str.upper()
+ sorted(cs.service_status.unique())`
 
-['ACTIVE', 'INACTIVE', 'PENDING DISCONNECT', 'PROVISIONING', 'SUSPENDED']
+ ['ACTIVE', 'INACTIVE', 'PENDING DISCONNECT', 'PROVISIONING', 'SUSPENDED']
 
 - It is notable that the columns start_date and end_date are not uniform in format. 
 
-`cs['start_date'] = pd.to_datetime(cs['start_date'])`
-`cs['end_date'] = pd.to_datetime(cs['end_date'])`
-`cs.head()`
+ `cs['start_date'] = pd.to_datetime(cs['start_date'])
+ cs['end_date'] = pd.to_datetime(cs['end_date'])
+ cs.head()`
 
 |index|start\_date|end\_date|
 |---|---|---|
@@ -151,14 +125,13 @@ Removing the column billing_status as it is replaced by column clean_billing_sta
 
 - Filling in empty end_date by adding the contract terms in monrth to the start date.
 
-`blank_end_date = cs['end_date'].isna()`
-
-`cs.loc[blank_end_date, 'end_date'] = cs.loc[blank_end_date].apply(`
-    `lambda x: x['start_date'] + pd.DateOffset(months=x['contract_term_months']),`
-    `axis=1`
-`)`
-
-`cs['end_date'].isna()`
+ `blank_end_date = cs['end_date'].isna()
+ cs.loc[blank_end_date, 'end_date'] = cs.loc[blank_end_date].apply(
+     lambda x: x['start_date'] + pd.DateOffset(months=x['contract_term_months']),
+     axis=1
+ )`
+ 
+ `cs['end_date'].isna()`
 
 | Index | End Date | 
 |-------|----------|
