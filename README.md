@@ -58,6 +58,8 @@ Tools Used:
   `sorted(cs['billing_status'].unique())`
 
   Standardizing the billing_status column, a new column called clean_billing_status is appended to the dataframe. Column billing_status can be removed.
+
+  
   `standardized = []
   for c in cs['billing_status']:
    if "billing" in c.lower():
@@ -66,6 +68,7 @@ Tools Used:
        standardized.append("NOT BILLED")
   cs['clean_billing_status'] = standardized
   cs.head()`
+
 
   Removing the column billing_status as it is replaced by column clean_billing_status
 
