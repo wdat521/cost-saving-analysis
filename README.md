@@ -53,12 +53,11 @@ Tools Used:
 | 7 | end_date | 1598 non-null | object |
 | 8 | contract_term_months | 2120 non-null | int64 |
 | 9 | billing_status | 2120 non-null | object |
-|10| decom_status           |  2120 non-null   | object|
-|11| service_status           |  2120   non-null                                                │
+|10 | decom_status | 2120 non-null | object |
+|11 | service_status | 2120 non-null │ object|
 df: float64(1), int64(3), object(11)
-Memory Usage: approximately **248.6 KB**
 
-First five rows of the dataframe 'cs':
+First five rows of the dataframe ```cs```:
 |index|circuit\_id|monthly\_recurring\_cost|a\_end|z\_end|product\_type|supplier|start\_date|end\_date|contract\_term\_months|billing\_status|decom\_status|service\_status|reclaim|reclaim\_total|utilization\_pct|
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 |0|CKT-07237|2824|Dallas DC1|London DC2|Internet DIA|Orange|13-11-22|12-11-27|36|BILLING|PENDING DECOM|Provisioning|NaN|NaN|34|
@@ -72,24 +71,33 @@ First five rows of the dataframe 'cs':
 
 - The categories for column billing_status is shown as: 'ACTIVE BILLING', 'BILLING', 'Not Billed', 'billing'. Categories 'ACTIVE BILLING', 'BILLING', and , 'billing' are the same in meaning.
 
+
 `sorted(cs['billing_status'].unique())`
+
+
 ['ACTIVE BILLING', 'BILLING', 'Not Billed', 'billing']
 
-- Standardizing the billing_status column, a new column called clean_billing_status is appended to the dataframe. Column billing_status can be removed.
-`standardized = []
 
-Standardizing format: billing_status:
-`for c in cs['billing_status']:
-    if "billing" in c.lower():
-        standardized.append("BILLING")
-    else:
-        standardized.append("NOT BILLED")
-cs['clean_billing_status'] = standardized
-cs.head()`
+- Standardizing the billing_status column, a new column called clean_billing_status is appended to the dataframe. Column billing_status can be removed.
+
+
+`standardized = []`
+
+`for c in cs['billing_status']:`
+   ` if "billing" in c.lower():`
+       ` standardized.append("BILLING")`
+   ` else:`
+       ` standardized.append("NOT BILLED")`
+       
+`cs['clean_billing_status'] = standardized`
+`cs.head()`
 
 Removing the column billing_status as it is replaced by column clean_billing_status
-`cs.drop(columns="billing_status", inplace=True)
-cs.head()`
+
+
+`cs.drop(columns="billing_status", inplace=True)`
+`cs.head()`
+
 
 |index|circuit\_id|monthly\_recurring\_cost|a\_end|z\_end|product\_type|supplier|start\_date|end\_date|contract\_term\_months|decom\_status|service\_status|reclaim|reclaim\_total|utilization\_pct|clean\_billing\_status|
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
@@ -101,11 +109,11 @@ cs.head()`
 
 - A reclaim or credit note can be expected if the circuit was reqeusted for termination, the vendor acknowledged request, yet we are still being billed. Hence looking at the dataset, the circuit has to be in billing state, decommissioned, and the service it is used for is inactive. Upon checking, the columns reclaim and reclaim_total are logical.
 
-`reclaim_columns = ['circuit_id','decom_status', 'service_status','clean_billing_status']
-reclaim_condition = cs['reclaim'] == 'YES' `
+`reclaim_columns = ['circuit_id','decom_status', 'service_status','clean_billing_status']`
+`reclaim_condition = cs['reclaim'] == 'YES' `
 
-`reclaim_df = cs.loc[reclaim_condition, reclaim_columns]
-reclaim_df.head()`
+`reclaim_df = cs.loc[reclaim_condition, reclaim_columns]`
+`reclaim_df.head()`
 
 |index|circuit\_id|decom\_status|service\_status|clean\_billing\_status|
 |---|---|---|---|---|
@@ -117,21 +125,21 @@ reclaim_df.head()`
 
 - Checking the service_status column, the categories 'Active' and 'active' are the same. To fix this:
 
-`# Format checking: service_status
-sorted(cs.service_status.unique())`
+`# Format checking: service_status`
+`sorted(cs.service_status.unique())`
 
 ['Active', 'Inactive', 'Pending Disconnect','Provisioning', 'Suspended', 'active']
 
-`cs['service_status'] = cs.service_status.str.upper()
-sorted(cs.service_status.unique())`
+`cs['service_status'] = cs.service_status.str.upper()`
+`sorted(cs.service_status.unique())`
 
 ['ACTIVE', 'INACTIVE', 'PENDING DISCONNECT', 'PROVISIONING', 'SUSPENDED']
 
 - It is notable that the columns start_date and end_date are not uniform in format. 
 
-`cs['start_date'] = pd.to_datetime(cs['start_date'])
-cs['end_date'] = pd.to_datetime(cs['end_date'])
-cs.head()`
+`cs['start_date'] = pd.to_datetime(cs['start_date'])`
+`cs['end_date'] = pd.to_datetime(cs['end_date'])`
+`cs.head()`
 
 |index|start\_date|end\_date|
 |---|---|---|
@@ -145,10 +153,10 @@ cs.head()`
 
 `blank_end_date = cs['end_date'].isna()`
 
-`cs.loc[blank_end_date, 'end_date'] = cs.loc[blank_end_date].apply(
-    lambda x: x['start_date'] + pd.DateOffset(months=x['contract_term_months']),
-    axis=1
-)`
+`cs.loc[blank_end_date, 'end_date'] = cs.loc[blank_end_date].apply(`
+    `lambda x: x['start_date'] + pd.DateOffset(months=x['contract_term_months']),`
+    `axis=1`
+`)`
 
 `cs['end_date'].isna()`
 
