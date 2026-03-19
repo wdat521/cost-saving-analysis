@@ -94,7 +94,7 @@ Tools Used:
  <img width="1438" height="294" alt="image" src="https://github.com/user-attachments/assets/adba33d4-54e0-4b8b-b609-ccbc3ec336ea" />
 
 
-* It is notable that the columns start_date and end_date are not uniform in format. There are also empty cells in the end_date. We can fill this in by adding the contract term in months to the start date.
+* It is notable that the columns start_date and end_date are not uniform in format. There are also empty cells in the end_date. We can fill these in by adding the contract term in months to the start date.
 
 
  <img width="1438" height="131" alt="image" src="https://github.com/user-attachments/assets/dd8acf36-d3bf-4423-8031-dddba87599bc" />
@@ -135,10 +135,12 @@ Tools Used:
 - Data Type: bool
 
 
+
 ## 🔍 Analyses
 
-### Cost-saving Objective I: Identify circuits that were requested for termination but are still being billed (services that are inactive, decommissioned, but are still being billed).
-Flagging rows that are cost savings (decom_status = DECOM, billing_status = BILLING, service_status = INACTIVE)
+### Cost-saving Objective I: Identify circuits that were requested for termination but are still being billed (services that are inactive, decommissioned, but are still being billed)
+
+Flagging rows that are cost savings (decom_status = DECOM, billing_status = BILLING, service_status = INACTIVE
 
 
 <img width="1436" height="96" alt="image" src="https://github.com/user-attachments/assets/55c73db7-870d-42d9-97dc-e0f866deab9f" />
@@ -160,7 +162,8 @@ Flagging rows that are cost savings (decom_status = DECOM, billing_status = BILL
 
 
 
-### Cost-saving Objective II: identify circuits that are potentially duplicate routes (the same product type, and A and Z locations).
+### Cost-saving Objective II: identify circuits that are potentially duplicate routes (the same product type, and A and Z locations)
+
 decom_status = ACTIVE, clean_billing_status = BILLING, service_status = ACTIVE and PROVISIONING)
 
 
@@ -177,7 +180,8 @@ decom_status = ACTIVE, clean_billing_status = BILLING, service_status = ACTIVE a
 
 
 
-### Cost-saving Objective III: identify circuits that are underused (utilization percentage > 20%).
+### Cost-saving Objective III: identify circuits that are underused (utilization percentage > 20%)
+
 Flagging underused circuits with less than 20% utilization rate
 
 
