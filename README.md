@@ -1,4 +1,4 @@
-# 📌 Cost Saving Analysis
+# 📌Network Inventory Cost Saving Analysis
 This project focuses on identifying unnecessary networking inventory costs.
 
 
@@ -13,6 +13,7 @@ Below are strategies that could generate cost savings:
 
 
 ## 📊 Dataframe 'cs' Overview
+The dataset is simulated using python and ChatGPT.
 
 **Type:** `pandas.core.frame.DataFrame`
 
@@ -49,7 +50,7 @@ First five rows of the dataframe ```cs```:
 
 ## ⚙️ Methodology
 Tools Used:
-* Python for data cleaning, data imputation, and exploratory data analysis
+* Python for data preprocessing and exploratory data analysis
 * Power BI for visualization
 
 ### Data Preprocessing
@@ -206,5 +207,21 @@ As an example, circuit CKT-07237 with both start and end dates value from the st
 Further investigation on contract terms is highly recommended.
 
 ## 💡 Insights
+The project generated a 1.5M USD of cost savings, and consequently reclaimd 143K USD. 
+
+The top three suppliers where we cut the most costs are BT, Orange, and Telstra. This would imply a call to closely monitor our termination requests with those suppliers.
+
+The top three products that we have spent the most are Wave, DIA, and Metro Fiber. This could be interesting for the procurement team.
+
+<img width="1417" height="797" alt="image" src="https://github.com/user-attachments/assets/bc907b4c-860a-4db8-90fa-53b99904de03" />
+
+<img width="664" height="543" alt="image" src="https://github.com/user-attachments/assets/644a480d-bc8b-4364-97bc-c2e7502a286e" />
+
 
 ## 📈 Recommendations
+
+* Improve internal documentation of circuit termination requests by using a project managenent tool like Jira.
+* Automate cease orders internally by using ERP or CRM tool to alert finance team regarding circuits that should no longer be paid.
+* Routine data monitoring and data cleaning in the database.
+* Notify the network engineer and procurement teams of the underutilized and possibly duplicate circuits for reassessment.
+* Conduct another project for a comprehensive data cleaning of our inventory by gathering data from our vendors, most importantly contract terms, start date, and end dates to crosscheck with our existing data.
