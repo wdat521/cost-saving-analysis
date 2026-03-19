@@ -214,8 +214,11 @@ The top three suppliers where we cut the most costs are BT, Orange, and Telstra.
 The top three products that we have spent the most are Wave, DIA, and Metro Fiber. This could be interesting for the procurement team.
 
 <img width="1417" height="797" alt="image" src="https://github.com/user-attachments/assets/bc907b4c-860a-4db8-90fa-53b99904de03" />
+
 <p> align="center"> 
- <img width="664" height="543" alt="image" src="https://github.com/user-attachments/assets/644a480d-bc8b-4364-97bc-c2e7502a286e" />
+ 
+<img width="664" height="543" alt="image" src="https://github.com/user-attachments/assets/644a480d-bc8b-4364-97bc-c2e7502a286e" />
+
 </p>
 
 ## 📈 Recommendations
