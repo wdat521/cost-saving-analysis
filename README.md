@@ -49,7 +49,7 @@ First five rows of the dataframe ```cs```:
 
 
 ## ⚙️ Methodology
-Tools Used:
+**Tools Used:**
 * Python for data preprocessing and exploratory data analysis
 * Power BI for visualization
 
