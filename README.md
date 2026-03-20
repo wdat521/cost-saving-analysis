@@ -1,21 +1,23 @@
 # 📌Network Inventory Cost Saving Analysis
-</br>
+
 ## Bad data can cost you millions hence this project aims to identify and remove unnecessary networking inventory costs.
-</br>
+
+
 ## 🧩 The Challenge 
-</br>
+
 The company is spending roughly 30% of its annual budget for inventory networking services and equipment management. Due to the 3-5% price increase of our suppliers, we want to **strategically reduce the inventory budget from 30% to 10%**, factoring in capital, storage, insurance, and obsolescence. By the end of 2025, we want to save at least 1M USD.
-</br>
+
 Below are strategies that could generate cost savings:
   * Identify circuits that were requested for termination but are still being billed (customer services that are inactive, decommissioned inventory, yet still being billed by the vendor). 
   * Identify circuits that are potentially duplicate routes (the same product type, and A and Z locations).
   * Identify circuits that are underused (utilization percentage > 20%).
   * Identify out of term contracts but are still being billed.
-</br>
+
+
 ## 📊 Data Overview
-</br>
+
 The dataset is simulated using ChatGPT and python. my knowledge on networking/telecommunication.
-</br>
+
 **Type:** `pandas.core.frame.DataFrame`
 
 **Range Index:** 2120 entries, from 0 to 2119
@@ -38,6 +40,7 @@ The dataset is simulated using ChatGPT and python. my knowledge on networking/te
 |11 | service_status | 2120 non-null │ object|
 df: float64(1), int64(3), object(11)
 </br>
+</br>
 First five rows of the dataframe ```cs```:
 |index|circuit\_id|monthly\_recurring\_cost|a\_end|z\_end|product\_type|supplier|start\_date|end\_date|contract\_term\_months|billing\_status|decom\_status|service\_status|reclaim|reclaim\_total|utilization\_pct|
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
@@ -46,27 +49,28 @@ First five rows of the dataframe ```cs```:
 |2|CKT-02822|1316|London DC1|Tokyo DC1|Wave|Orange|2021/11/16|2024-11-15|36|billing|DECOM|Active|NaN|NaN|55|
 |3|CKT-07997|4564|Zurich DC1|Amsterdam DC1|Metro Fiber|BT|28-01-21|NaN|36|BILLING|ACTIVE|Pending Disconnect|NaN|NaN|94|
 |4|CKT-03339|150|Tokyo DC1|London DC1|Cross Connect|Lumen|2021/09/24|23-09-26|60|BILLING|PENDING DECOM|Provisioning|NaN|NaN|61|
-</br>
+
+
 ## ⚙️ Methodology
-</br>
+
 ### Data Preprocessing
-</br>
+
 1. No empty values in columns circuit_id, a_end, z_end, product_type, supplier, start_date, monthly_recurring_cost, contract_termn_months, decom_status, and utilization_pct. Values are also in the smae format. Note that circuit_id doesn't have to be unique.
 </br>
-
-2. The categories for column billing_status is shown as: 'ACTIVE BILLING', 'BILLING', 'Not Billed', 'billing'.
 </br>
+</br>
+2. The categories for column billing_status is shown as: 'ACTIVE BILLING', 'BILLING', 'Not Billed', 'billing'.
 
    <img width="1759" height="118" alt="image" src="https://github.com/user-attachments/assets/fda8be86-cd1c-430b-a226-6f2ed2c268e8" />
 </br>
-
+</br>
    'ACTIVE BILLING', 'BILLING', and 'billing' are the same in meaning. Using python, the categories are then narrowed down into: 'BILLING' and 'NOT BILLED'.
     I created a new column called clean_billing_status for the two categories and removed the billing_status column.
 </br>
-
+</br>
  <img width="1760" height="437" alt="image" src="https://github.com/user-attachments/assets/cdf88c22-36b4-4bd0-8871-19d9f4c6b665" />
 </br>
-
+</br>
 |index|circuit\_id|monthly\_recurring\_cost|a\_end|z\_end|product\_type|supplier|start\_date|end\_date|contract\_term\_months|billing\_status|decom\_status|service\_status|reclaim|reclaim\_total|utilization\_pct|clean\_billing\_status|
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 |0|CKT-07237|2824|Dallas DC1|London DC2|Internet DIA|Orange|13-11-22|12-11-27|36|BILLING|PENDING DECOM|Provisioning|NaN|NaN|34|BILLING|
