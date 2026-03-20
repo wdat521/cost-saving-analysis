@@ -1,5 +1,5 @@
 # 📌Network Inventory Cost Saving Analysis
-Bad data can cost you millions, hence this project aims to identify and remove unnecessary costs by examining our networking inventory .
+Bad data can cost you millions, hence this project aims to identify and remove unnecessary costs by examining our networking inventory.
 
 ## 🧩 The Challenge 
 The company is spending roughly 30% of its annual budget for inventory networking services and equipment management. Due to the 3-5% price increase of our suppliers, we want to `strategically reduce the inventory budget from 30% to 10%`, factoring in capital, storage, insurance, and obsolescence. By the end of 2025, we want to save at least 1M USD.
