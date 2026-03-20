@@ -67,8 +67,8 @@ First five rows of the dataframe ```cs```:
 
 
   
-  'ACTIVE BILLING', 'BILLING', and 'billing' are the same in meaning. Using python, the categories are then narrowed down into: 'BILLING' and 'NOT BILLED'.
-  I created a new column called clean_billing_status for the two categories and removed the billing_status column.
+   'ACTIVE BILLING', 'BILLING', and 'billing' are the same in meaning. Using python, the categories are then narrowed down into: 'BILLING' and 'NOT BILLED'.
+   I created a new column called clean_billing_status for the two categories and removed the billing_status column.
 
 
 
@@ -121,7 +121,7 @@ First five rows of the dataframe ```cs```:
 
 
 
- 'Active' and 'active' are the same. To fix this, I formatted the categories to uppercase using the str.upper() method in pandas python:
+   'Active' and 'active' are the same. To fix this, I formatted the categories to uppercase using the str.upper() method in pandas python:
 
 
 
@@ -152,10 +152,10 @@ First five rows of the dataframe ```cs```:
 
 
 
- There are also empty cells in the end_date. We can fill these in by adding the contract term in months to the start date.
+   There are also empty cells in the end_date. We can fill these in by adding the contract term in months to the start date.
  
- Rows with empty end_date are selected and stored in the variable blank_end_date using the accessor **loc()**.
- Month terms are then added to the start dates using the function pd.DateOffset().
+   Rows with empty end_date are selected and stored in the variable blank_end_date using the accessor **loc()**.
+   Month terms are then added to the start dates using the function pd.DateOffset().
 
 
 
@@ -165,6 +165,7 @@ First five rows of the dataframe ```cs```:
 
   
 
+<p> align="center">
 | Index | End Date | 
 |-------|----------|
 | 0     | False    |
@@ -183,8 +184,7 @@ First five rows of the dataframe ```cs```:
 - Rows: 2120
 - Columns: 1
 - Data Type: bool
-
-
+</p>
 
 
 
@@ -199,7 +199,7 @@ First five rows of the dataframe ```cs```:
 
 
 
- Flagging rows that are cost savings (decom_status = DECOM, billing_status = BILLING, service_status = INACTIVE) using the **function .map** in python pandas.
+   Flagging rows that are cost savings (decom_status = DECOM, billing_status = BILLING, service_status = INACTIVE) using the **function .map** in python pandas.
 
 
 
@@ -222,7 +222,8 @@ First five rows of the dataframe ```cs```:
 
 ### Cost-saving Objective II: identify circuits that are potentially duplicate routes (the same product type, and A and Z locations)
 
-decom_status = ACTIVE, clean_billing_status = BILLING, service_status = ACTIVE and PROVISIONING)
+
+   decom_status = ACTIVE, clean_billing_status = BILLING, service_status = ACTIVE and PROVISIONING)
 
 
 
@@ -245,7 +246,7 @@ decom_status = ACTIVE, clean_billing_status = BILLING, service_status = ACTIVE a
 
 ### Cost-saving Objective III: identify circuits that are underused (utilization percentage > 20%)
 
-Flagging underused circuits:
+   Flagging underused circuits:
 
 
 
@@ -276,8 +277,8 @@ Flagging underused circuits:
 
 
 
- Upon closer look, inconsistencies are detected in the end_date and contract_term_months columns.
- As an example, circuit CKT-07237 with both start and end dates value from the start, started on 2022-11-13. With a 36 contract term in months, it should have ended on 2025-11-13, but it shows 2027-12-11 instead.
+   Upon closer look, inconsistencies are detected in the end_date and contract_term_months columns.
+   As an example, circuit CKT-07237 with both start and end dates value from the start, started on 2022-11-13. With a 36 contract term in months, it should have ended on 2025-11-13, but it shows 2027-12-11 instead.
 
 
 
@@ -287,7 +288,7 @@ Flagging underused circuits:
 |0|CKT-07237|2022-11-13 00:00:00|2027-12-11 00:00:00|
 
 
-Further investigation on contract terms is highly recommended.
+   Further investigation on contract terms is highly recommended.
 
 
 
