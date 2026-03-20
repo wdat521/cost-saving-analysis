@@ -130,6 +130,7 @@ First five rows of the dataframe ```cs```:
 - Data Type: bool
 
 `Data Analyses:`
+
 Below are strategies that could generate cost savings:
   * Identify circuits that were requested for termination but are still being billed (customer services that are inactive, decommissioned inventory, yet still being billed by the vendor). 
   * Identify circuits that are potentially duplicate routes (the same product type, and A and Z locations).
