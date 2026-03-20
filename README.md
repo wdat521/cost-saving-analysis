@@ -169,7 +169,7 @@ First five rows of the dataframe ```cs```:
 
   
 
-<p> align="center">
+
 | Index | End Date | 
 |-------|----------|
 | 0     | False    |
@@ -188,7 +188,7 @@ First five rows of the dataframe ```cs```:
 - Rows: 2120
 - Columns: 1
 - Data Type: bool
-</p>
+
 
 
 
