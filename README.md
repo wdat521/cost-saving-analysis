@@ -1,10 +1,7 @@
 # 📌Network Inventory Cost Saving Analysis
-
-## Bad data can cost you millions hence this project aims to identify and remove unnecessary networking inventory costs.
-
+Bad data can cost you millions hence this project aims to identify and remove unnecessary networking inventory costs.
 
 ## 🧩 The Challenge 
-
 The company is spending roughly 30% of its annual budget for inventory networking services and equipment management. Due to the 3-5% price increase of our suppliers, we want to **strategically reduce the inventory budget from 30% to 10%**, factoring in capital, storage, insurance, and obsolescence. By the end of 2025, we want to save at least 1M USD.
 
 Below are strategies that could generate cost savings:
@@ -15,7 +12,6 @@ Below are strategies that could generate cost savings:
 
 
 ## 📊 Data Overview
-
 The dataset is simulated using ChatGPT and python. my knowledge on networking/telecommunication.
 
 **Type:** `pandas.core.frame.DataFrame`
@@ -52,8 +48,7 @@ First five rows of the dataframe ```cs```:
 
 
 ## ⚙️ Methodology
-
-### Data Preprocessing
+### **Data Preprocessing**
 
 1. No empty values in columns circuit_id, a_end, z_end, product_type, supplier, start_date, monthly_recurring_cost, contract_termn_months, decom_status, and utilization_pct. Values are also in the smae format. Note that circuit_id doesn't have to be unique.
 
@@ -162,7 +157,6 @@ First five rows of the dataframe ```cs```:
 |84|CKT-09044|300|Ashburn DC1|New York DC1|Fiber|BT|2019-11-28 00:00:00|2022-11-28 00:00:00|36|DECOM|INACTIVE|YES|12957\.0|79|BILLING|YES|
 |93|CKT-05688|350|Frankfurt DC2|Frankfurt DC1|Dark Fiber|BT|2018-09-12 00:00:00|2020-09-12 00:00:00|24|DECOM|INACTIVE|NaN|NaN|59|BILLING|YES|
 
-</br>
 
 ### Cost-saving Objective II: identify circuits that are potentially duplicate routes (the same product type, and A and Z locations)
 
@@ -179,7 +173,6 @@ First five rows of the dataframe ```cs```:
 |1520|CKT-07093|Amsterdam DC1|Frankfurt DC1|Internet DIA|true|
 |788|CKT-00486|Ashburn DC1|Singapore DC1|Cross Connect|true|
 
-</br>
 
 ### Cost-saving Objective III: identify circuits that are underused (utilization percentage > 20%)
 
@@ -196,7 +189,6 @@ First five rows of the dataframe ```cs```:
 |12|CKT-09321|4340|Zurich DC1|Frankfurt DC2|Internet DIA|Lumen|2019-02-09 00:00:00|2022-02-08 00:00:00|60|ACTIVE|ACTIVE|NaN|NaN|8|BILLING|false|YES|
 |18|CKT-00754|150|Singapore DC1|Singapore DC1|Fiber|Telstra|2023-03-14 00:00:00|2025-03-13 00:00:00|60|DECOM|INACTIVE|NaN|NaN|11|NOT BILLED|false|YES|
 
-</br>
 
 ### Cost-saving Objective IV: identify out of term contracts but are still being billed to reassess usability.
 
