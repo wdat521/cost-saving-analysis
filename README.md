@@ -58,7 +58,6 @@ First five rows of the dataframe ```cs```:
 1. No empty values in columns circuit_id, a_end, z_end, product_type, supplier, start_date, monthly_recurring_cost, contract_termn_months, decom_status, and utilization_pct. Values are also in the smae format. Note that circuit_id doesn't have to be unique.
 
 2. The categories for column billing_status is shown as: 'ACTIVE BILLING', 'BILLING', 'Not Billed', 'billing'.
-</br>
 
 <img width="1759" height="118" alt="image" src="https://github.com/user-attachments/assets/fda8be86-cd1c-430b-a226-6f2ed2c268e8" />
 </br></br>
