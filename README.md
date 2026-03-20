@@ -131,18 +131,12 @@ First five rows of the dataframe ```cs```:
 
 `Data Analyses:`
 
-Below are strategies that could generate cost savings:
-  * Identify circuits that were requested for termination but are still being billed (customer services that are inactive, decommissioned inventory, yet still being billed by the vendor). 
-  * Identify circuits that are potentially duplicate routes (the same product type, and A and Z locations).
-  * Identify circuits that are underused (utilization percentage > 20%).
-  * Identify out of term contracts but are still being billed.
+### Cost-Saving Objective I: Identify Circuits That Are Use For Inactive Customer Project
 
-### Cost-Saving Objective I: Identify circuits that were requested for termination but are still being billed (services that are inactive, decommissioned, but are still being billed)
-
-<img width="1759" height="120" alt="image" src="https://github.com/user-attachments/assets/b8976f27-13e1-44b1-a6a6-598aa343d199" />
+<img width="1434" height="269" alt="image" src="https://github.com/user-attachments/assets/2a405f7b-f418-4988-a221-3a93831a51d8" />
 </br></br>
 
-   Flagging rows that are cost savings (decom_status = DECOM, billing_status = BILLING, service_status = INACTIVE) using the **function .map** in python pandas.
+   Flagging rows that are cost savings (decom_status = ACTIVE, billing_status = BILLING, service_status = INACTIVE) using the **function .map** in python pandas.
 
 <img width="1735" height="267" alt="image" src="https://github.com/user-attachments/assets/a49de918-5a48-4090-a3d5-0fcda72cec73" />
 </br></br>
