@@ -1,8 +1,8 @@
 # 📌Network Inventory Cost Saving Analysis
-Bad data can cost you millions hence this project aims to identify and remove unnecessary networking inventory costs.
+Bad data can cost you millions, hence this project aims to identify and remove unnecessary costs by examining our networking inventory .
 
 ## 🧩 The Challenge 
-The company is spending roughly 30% of its annual budget for inventory networking services and equipment management. Due to the 3-5% price increase of our suppliers, we want to **strategically reduce the inventory budget from 30% to 10%**, factoring in capital, storage, insurance, and obsolescence. By the end of 2025, we want to save at least 1M USD.
+The company is spending roughly 30% of its annual budget for inventory networking services and equipment management. Due to the 3-5% price increase of our suppliers, we want to `**strategically reduce the inventory budget from 30% to 10%**`, factoring in capital, storage, insurance, and obsolescence. By the end of 2025, we want to save at least 1M USD.
 
 Below are strategies that could generate cost savings:
   * Identify circuits that were requested for termination but are still being billed (customer services that are inactive, decommissioned inventory, yet still being billed by the vendor). 
@@ -12,7 +12,7 @@ Below are strategies that could generate cost savings:
 
 
 ## 📊 Data Overview
-The dataset is simulated using ChatGPT and python. my knowledge on networking/telecommunication.
+The dataset is simulated using ChatGPT, python, and my knowledge on networking/telecommunication inventory data.
 
 **Type:** `pandas.core.frame.DataFrame`
 
@@ -48,7 +48,7 @@ First five rows of the dataframe ```cs```:
 
 
 ## ⚙️ Methodology
-### **Data Preprocessing**
+`**Data Preprocessing:**`
 
 1. No empty values in columns circuit_id, a_end, z_end, product_type, supplier, start_date, monthly_recurring_cost, contract_termn_months, decom_status, and utilization_pct. Values are also in the smae format. Note that circuit_id doesn't have to be unique.
 
@@ -136,9 +136,9 @@ First five rows of the dataframe ```cs```:
 - Columns: 1
 - Data Type: bool
 
-## Data Analyses
+`**Data Analyses:**`
 
-### Cost-saving Objective I: Identify circuits that were requested for termination but are still being billed (services that are inactive, decommissioned, but are still being billed)
+### Cost-Saving Objective I: Identify circuits that were requested for termination but are still being billed (services that are inactive, decommissioned, but are still being billed)
 
 <img width="1759" height="120" alt="image" src="https://github.com/user-attachments/assets/b8976f27-13e1-44b1-a6a6-598aa343d199" />
 </br></br>
@@ -158,7 +158,7 @@ First five rows of the dataframe ```cs```:
 |93|CKT-05688|350|Frankfurt DC2|Frankfurt DC1|Dark Fiber|BT|2018-09-12 00:00:00|2020-09-12 00:00:00|24|DECOM|INACTIVE|NaN|NaN|59|BILLING|YES|
 
 
-### Cost-saving Objective II: identify circuits that are potentially duplicate routes (the same product type, and A and Z locations)
+### Cost-Saving Objective II: identify circuits that are potentially duplicate routes (the same product type, and A and Z locations)
 
    decom_status = ACTIVE, clean_billing_status = BILLING, service_status = ACTIVE and PROVISIONING)
 
@@ -174,7 +174,7 @@ First five rows of the dataframe ```cs```:
 |788|CKT-00486|Ashburn DC1|Singapore DC1|Cross Connect|true|
 
 
-### Cost-saving Objective III: identify circuits that are underused (utilization percentage > 20%)
+### Cost-Saving Objective III: identify circuits that are underused (utilization percentage > 20%)
 
    Flagging underused circuits:
    
@@ -190,7 +190,7 @@ First five rows of the dataframe ```cs```:
 |18|CKT-00754|150|Singapore DC1|Singapore DC1|Fiber|Telstra|2023-03-14 00:00:00|2025-03-13 00:00:00|60|DECOM|INACTIVE|NaN|NaN|11|NOT BILLED|false|YES|
 
 
-### Cost-saving Objective IV: identify out of term contracts but are still being billed to reassess usability.
+### Cost-Saving Objective IV: identify out of term contracts but are still being billed to reassess usability
 
 <img width="1762" height="73" alt="image" src="https://github.com/user-attachments/assets/936f03de-3681-427d-9921-796aa0e7ee54" />
 </br></br>
@@ -208,11 +208,13 @@ First five rows of the dataframe ```cs```:
 
 ## 💡 Insights
 
-The project generated a 1.5M USD of cost savings, and consequently reclaimd 143K USD. 
+The project generated a 1.52M USD of cost savings, and consequently reclaimd 143K USD. 
 
 The top three suppliers where we cut the most costs are BT, Orange, and Telstra. This would imply a call to closely monitor our termination requests with those suppliers.
 
 The top three products that we have spent the most are Wave, DIA, and Metro Fiber. This could be interesting for the procurement team.
+
+Underutilized circuits are also indicated along with the possible duplicate circuits with respective to their route and product type. This could be interesting for the network engineer team.
 
 <img width="1417" height="797" alt="image" src="https://github.com/user-attachments/assets/bc907b4c-860a-4db8-90fa-53b99904de03" />
 
