@@ -166,8 +166,7 @@ First five rows of the dataframe ```cs```:
 |84|CKT-09044|300|Ashburn DC1|New York DC1|Fiber|BT|2019-11-28 00:00:00|2022-11-28 00:00:00|36|DECOM|INACTIVE|YES|12957\.0|79|BILLING|YES|
 |93|CKT-05688|350|Frankfurt DC2|Frankfurt DC1|Dark Fiber|BT|2018-09-12 00:00:00|2020-09-12 00:00:00|24|DECOM|INACTIVE|NaN|NaN|59|BILLING|YES|
 
-</br></br>
-
+</br>
 ### Cost-saving Objective II: identify circuits that are potentially duplicate routes (the same product type, and A and Z locations)
 
    decom_status = ACTIVE, clean_billing_status = BILLING, service_status = ACTIVE and PROVISIONING)
@@ -183,8 +182,7 @@ First five rows of the dataframe ```cs```:
 |1520|CKT-07093|Amsterdam DC1|Frankfurt DC1|Internet DIA|true|
 |788|CKT-00486|Ashburn DC1|Singapore DC1|Cross Connect|true|
 
-</br></br>
-
+</br>
 ### Cost-saving Objective III: identify circuits that are underused (utilization percentage > 20%)
 
    Flagging underused circuits:
@@ -200,9 +198,7 @@ First five rows of the dataframe ```cs```:
 |12|CKT-09321|4340|Zurich DC1|Frankfurt DC2|Internet DIA|Lumen|2019-02-09 00:00:00|2022-02-08 00:00:00|60|ACTIVE|ACTIVE|NaN|NaN|8|BILLING|false|YES|
 |18|CKT-00754|150|Singapore DC1|Singapore DC1|Fiber|Telstra|2023-03-14 00:00:00|2025-03-13 00:00:00|60|DECOM|INACTIVE|NaN|NaN|11|NOT BILLED|false|YES|
 
-</br></br>
-
-
+</br>
 ### Cost-saving Objective IV: identify out of term contracts but are still being billed to reassess usability.
 
 <img width="1762" height="73" alt="image" src="https://github.com/user-attachments/assets/936f03de-3681-427d-9921-796aa0e7ee54" />
