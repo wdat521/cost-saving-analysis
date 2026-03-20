@@ -121,7 +121,7 @@ First five rows of the dataframe ```cs```:
 
 
 
-   'Active' and 'active' are the same. To fix this, I formatted the categories to uppercase using the str.upper() method in pandas python:
+    'Active' and 'active' are the same. To fix this, I formatted the categories to uppercase using the str.upper() method in pandas python:
 
 
 
