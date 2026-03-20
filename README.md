@@ -178,7 +178,6 @@ First five rows of the dataframe ```cs```:
 ### Cost-saving Objective III: identify circuits that are underused (utilization percentage > 20%)
 
    Flagging underused circuits:
-</br>
 <img width="1752" height="169" alt="image" src="https://github.com/user-attachments/assets/83a31c65-0a15-489b-a9b4-a1292201efa6" />
 
 |index|circuit\_id|monthly\_recurring\_cost|a\_end|z\_end|product\_type|supplier|start\_date|end\_date|contract\_term\_months|decom\_status|service\_status|reclaim|reclaim\_total|utilization\_pct|clean\_billing\_status|duplicate\_route\_flag|underused|
@@ -188,8 +187,8 @@ First five rows of the dataframe ```cs```:
 |10|CKT-03037|4767|Amsterdam DC1|London DC1|Wave|Equinix|2022-09-25 00:00:00|2024-09-24 00:00:00|48|ACTIVE|ACTIVE|NaN|NaN|0|BILLING|false|YES|
 |12|CKT-09321|4340|Zurich DC1|Frankfurt DC2|Internet DIA|Lumen|2019-02-09 00:00:00|2022-02-08 00:00:00|60|ACTIVE|ACTIVE|NaN|NaN|8|BILLING|false|YES|
 |18|CKT-00754|150|Singapore DC1|Singapore DC1|Fiber|Telstra|2023-03-14 00:00:00|2025-03-13 00:00:00|60|DECOM|INACTIVE|NaN|NaN|11|NOT BILLED|false|YES|
-</br>
-</br>
+
+
 ### Cost-saving Objective IV: identify out of term contracts but are still being billed to reassess usability.
 
 <img width="1762" height="73" alt="image" src="https://github.com/user-attachments/assets/936f03de-3681-427d-9921-796aa0e7ee54" />
@@ -208,21 +207,19 @@ First five rows of the dataframe ```cs```:
 
 ## 💡 Insights
 
-
 The project generated a 1.5M USD of cost savings, and consequently reclaimd 143K USD. 
 
 The top three suppliers where we cut the most costs are BT, Orange, and Telstra. This would imply a call to closely monitor our termination requests with those suppliers.
 
 The top three products that we have spent the most are Wave, DIA, and Metro Fiber. This could be interesting for the procurement team.
+
 <img width="1417" height="797" alt="image" src="https://github.com/user-attachments/assets/bc907b4c-860a-4db8-90fa-53b99904de03" />
-</br>
 
 <p> align="center"> 
  <img width="664" height="543" alt="image" src="https://github.com/user-attachments/assets/644a480d-bc8b-4364-97bc-c2e7502a286e" />
 </p>
 
 ## 📈 Recommendations
-
 
 * Improve internal documentation of circuit termination requests by using a project managenent tool like Jira.
 * Automate cease orders internally by using ERP or CRM tool to alert finance team regarding circuits that should no longer be paid.
