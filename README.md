@@ -1,5 +1,5 @@
 # 📌Network Inventory Cost Saving Analysis
-Bad data can cost you millions, hence this project aims to identify and remove unnecessary costs by examining our networking inventory.
+Bad data can cost you millions, hence this project aims to identify and remove unnecessary costs by examining our network inventory.
 
 ## 🧩 The Challenge 
 The company is spending roughly 30% of its annual budget for inventory networking services and equipment management. Due to the 3-5% price increase of our suppliers, we want to `strategically reduce the inventory budget from 30% to 10%`, factoring in capital, storage, insurance, and obsolescence. By the end of 2025, we want to save at least 1M USD.
@@ -43,7 +43,7 @@ First five rows of the dataframe ```cs```:
 ## ⚙️ Methodology
 `Data Preprocessing:`
 
-1. No empty values in columns circuit_id, a_end, z_end, product_type, supplier, start_date, monthly_recurring_cost, contract_termn_months, decom_status, and utilization_pct. Values are also in the smae format. Note that circuit_id doesn't have to be unique.
+1. No empty values in columns circuit_id, a_end, z_end, product_type, supplier, start_date, monthly_recurring_cost, contract_termn_months, decom_status, and utilization_pct. Values are also in the same format. Note that circuit_id doesn't have to be unique.
 
 2. The categories for column billing_status is shown as: 'ACTIVE BILLING', 'BILLING', 'Not Billed', 'billing'.
 
