@@ -60,13 +60,13 @@ First five rows of the dataframe ```cs```:
 2. The categories for column billing_status is shown as: 'ACTIVE BILLING', 'BILLING', 'Not Billed', 'billing'.
 
 <img width="1759" height="118" alt="image" src="https://github.com/user-attachments/assets/fda8be86-cd1c-430b-a226-6f2ed2c268e8" />
-</br></br>
+</br>
 
    'ACTIVE BILLING', 'BILLING', and 'billing' are the same in meaning. Using python, the categories are then narrowed down into: 'BILLING' and 'NOT BILLED'.
     I created a new column called clean_billing_status for the two categories and removed the billing_status column.
 
 <img width="1760" height="437" alt="image" src="https://github.com/user-attachments/assets/cdf88c22-36b4-4bd0-8871-19d9f4c6b665" />
-</br></br>
+</br>
 
 |index|circuit\_id|monthly\_recurring\_cost|a\_end|z\_end|product\_type|supplier|start\_date|end\_date|contract\_term\_months|billing\_status|decom\_status|service\_status|reclaim|reclaim\_total|utilization\_pct|clean\_billing\_status|
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
@@ -90,8 +90,6 @@ First five rows of the dataframe ```cs```:
 |314|CKT-08592|DECOM|Inactive|BILLING|
 |327|CKT-08965|DECOM|Inactive|BILLING|
 
-</br>
-
 4. The categories in service_status column are: 'Active', 'Inactive', 'Pending Disconnect','Provisioning', 'Suspended', 'active'.
    
 <img width="1755" height="193" alt="image" src="https://github.com/user-attachments/assets/f6881882-5084-4e03-a78c-f0ab40499095" />
@@ -100,8 +98,6 @@ First five rows of the dataframe ```cs```:
    'Active' and 'active' are the same. To fix this, I formatted the categories to uppercase using the str.upper() method in pandas python:
 
  <img width="1757" height="149" alt="image" src="https://github.com/user-attachments/assets/1f2c5625-33d2-4a63-b679-da4e88e28613" />
-
-</br>
 
 5. It is notable that the columns start_date and end_date are not uniform in format.
 
@@ -124,7 +120,7 @@ First five rows of the dataframe ```cs```:
    Month terms are then added to the start dates using the function pd.DateOffset().
 
 <img width="1752" height="318" alt="image" src="https://github.com/user-attachments/assets/c7fd36f4-825b-449f-b093-adc161302ce1" />
-</br></br>
+</br>
 
 | Index | End Date | 
 |-------|----------|
