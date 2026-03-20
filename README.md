@@ -197,9 +197,9 @@ Below are strategies that could generate cost savings:
    As an example, circuit CKT-07237 with both start and end dates value from the start, started on 2022-11-13. With a 36 contract term in months, it should have ended on 2025-11-13, but it shows 2027-12-11 instead.
 
 
-|index|circuit\_id|start\_date|end\_date|
-|---|---|---|---|
-|0|CKT-07237|2022-11-13 00:00:00|2027-12-11 00:00:00|
+|index|circuit\_id|start\_date|end\_date|contract\_term\_months|
+|---|---|---|---|---|
+|0|CKT-07237|2022-11-13 00:00:00|2027-12-11 00:00:00|36|
 
    Further investigation on contract terms is highly recommended.
 
