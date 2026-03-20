@@ -102,6 +102,7 @@ First five rows of the dataframe ```cs```:
    'Active' and 'active' are the same. To fix this, I formatted the categories to uppercase using the str.upper() method in pandas python:
 
  <img width="1757" height="149" alt="image" src="https://github.com/user-attachments/assets/1f2c5625-33d2-4a63-b679-da4e88e28613" />
+
 </br>
 
 5. It is notable that the columns start_date and end_date are not uniform in format.
