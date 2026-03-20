@@ -59,7 +59,7 @@ First five rows of the dataframe ```cs```:
     1. No empty values in columns circuit_id, a_end, z_end, product_type, supplier, start_date, monthly_recurring_cost, contract_termn_months, decom_status, and utilization_pct. Values are also in the smae format. Note that circuit_id doesn't have to be unique.
 
 
-     2. The categories for column billing_status is shown as: 'ACTIVE BILLING', 'BILLING', 'Not Billed', 'billing'.
+    2. The categories for column billing_status is shown as: 'ACTIVE BILLING', 'BILLING', 'Not Billed', 'billing'.
 
 
 
@@ -143,6 +143,7 @@ First five rows of the dataframe ```cs```:
 
 
 
+
 |index|start\_date|end\_date|
 |---|---|---|
 |0|2022-11-13 00:00:00|2027-12-11 00:00:00|
@@ -154,10 +155,11 @@ First five rows of the dataframe ```cs```:
 
 
 
-   There are also empty cells in the end_date. We can fill these in by adding the contract term in months to the start date.
+
+    There are also empty cells in the end_date. We can fill these in by adding the contract term in months to the start date.
  
-   Rows with empty end_date are selected and stored in the variable blank_end_date using the accessor **loc()**.
-   Month terms are then added to the start dates using the function pd.DateOffset().
+    Rows with empty end_date are selected and stored in the variable blank_end_date using the accessor **loc()**.
+    Month terms are then added to the start dates using the function pd.DateOffset().
 
 
 
@@ -201,7 +203,7 @@ First five rows of the dataframe ```cs```:
 
 
 
-   Flagging rows that are cost savings (decom_status = DECOM, billing_status = BILLING, service_status = INACTIVE) using the **function .map** in python pandas.
+    Flagging rows that are cost savings (decom_status = DECOM, billing_status = BILLING, service_status = INACTIVE) using the **function .map** in python pandas.
 
 
 
@@ -225,7 +227,7 @@ First five rows of the dataframe ```cs```:
 ### Cost-saving Objective II: identify circuits that are potentially duplicate routes (the same product type, and A and Z locations)
 
 
-   decom_status = ACTIVE, clean_billing_status = BILLING, service_status = ACTIVE and PROVISIONING)
+    decom_status = ACTIVE, clean_billing_status = BILLING, service_status = ACTIVE and PROVISIONING)
 
 
 
@@ -248,7 +250,7 @@ First five rows of the dataframe ```cs```:
 
 ### Cost-saving Objective III: identify circuits that are underused (utilization percentage > 20%)
 
-   Flagging underused circuits:
+    Flagging underused circuits:
 
 
 
@@ -279,8 +281,8 @@ First five rows of the dataframe ```cs```:
 
 
 
-   Upon closer look, inconsistencies are detected in the end_date and contract_term_months columns.
-   As an example, circuit CKT-07237 with both start and end dates value from the start, started on 2022-11-13. With a 36 contract term in months, it should have ended on 2025-11-13, but it shows 2027-12-11 instead.
+    Upon closer look, inconsistencies are detected in the end_date and contract_term_months columns.
+    As an example, circuit CKT-07237 with both start and end dates value from the start, started on 2022-11-13. With a 36 contract term in months, it should have ended on 2025-11-13, but it shows 2027-12-11 instead.
 
 
 
@@ -290,12 +292,13 @@ First five rows of the dataframe ```cs```:
 |0|CKT-07237|2022-11-13 00:00:00|2027-12-11 00:00:00|
 
 
-   Further investigation on contract terms is highly recommended.
+    Further investigation on contract terms is highly recommended.
 
 
 
 
 ## 💡 Insights
+
 
 The project generated a 1.5M USD of cost savings, and consequently reclaimd 143K USD. 
 
@@ -324,6 +327,7 @@ The top three products that we have spent the most are Wave, DIA, and Metro Fibe
 
 
 ## 📈 Recommendations
+
 
 * Improve internal documentation of circuit termination requests by using a project managenent tool like Jira.
 * Automate cease orders internally by using ERP or CRM tool to alert finance team regarding circuits that should no longer be paid.
