@@ -65,6 +65,8 @@ First five rows of the dataframe ```cs```:
     I created a new column called clean_billing_status for the two categories and removed the billing_status column.
 
 <img width="1760" height="437" alt="image" src="https://github.com/user-attachments/assets/cdf88c22-36b4-4bd0-8871-19d9f4c6b665" />
+</br>
+</br>
 
 |index|circuit\_id|monthly\_recurring\_cost|a\_end|z\_end|product\_type|supplier|start\_date|end\_date|contract\_term\_months|billing\_status|decom\_status|service\_status|reclaim|reclaim\_total|utilization\_pct|clean\_billing\_status|
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
