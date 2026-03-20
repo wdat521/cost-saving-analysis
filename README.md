@@ -75,6 +75,7 @@ First five rows of the dataframe ```cs```:
 |2|CKT-02822|1316|London DC1|Tokyo DC1|Wave|Orange|2021/11/16|2024-11-15|36|billing|DECOM|Active|NaN|NaN|55|BILLING|
 |3|CKT-07997|4564|Zurich DC1|Amsterdam DC1|Metro Fiber|BT|28-01-21|NaN|36|BILLING|ACTIVE|Pending Disconnect|NaN|NaN|94|BILLING|
 |4|CKT-03339|150|Tokyo DC1|London DC1|Cross Connect|Lumen|2021/09/24|23-09-26|60|BILLING|PENDING DECOM|Provisioning|NaN|NaN|61|BILLING|
+
 </br></br>
 
 3. A reclaim or credit note may be requested if the circuit was reqeusted for termination, the vendor acknowledged request, yet we are still being billed.
@@ -90,6 +91,7 @@ First five rows of the dataframe ```cs```:
 |194|CKT-07283|DECOM|Inactive|BILLING|
 |314|CKT-08592|DECOM|Inactive|BILLING|
 |327|CKT-08965|DECOM|Inactive|BILLING|
+
 </br></br>
 
 4. The categories in service_status column are: 'Active', 'Inactive', 'Pending Disconnect','Provisioning', 'Suspended', 'active'.
@@ -114,6 +116,7 @@ First five rows of the dataframe ```cs```:
 |2|2021-11-16 00:00:00|2024-11-15 00:00:00|
 |3|2021-01-28 00:00:00|NaT|
 |4|2021-09-24 00:00:00|2026-09-23 00:00:00|
+
 </br></br>
 
    There are also empty cells in the end_date. We can fill these in by adding the contract term in months to the start date.
@@ -162,6 +165,7 @@ First five rows of the dataframe ```cs```:
 |79|CKT-09319|150|Singapore DC1|Tokyo DC1|Dark Fiber|Lumen|2018-09-03 00:00:00|2021-09-03 00:00:00|36|DECOM|INACTIVE|NaN|NaN|93|BILLING|YES|
 |84|CKT-09044|300|Ashburn DC1|New York DC1|Fiber|BT|2019-11-28 00:00:00|2022-11-28 00:00:00|36|DECOM|INACTIVE|YES|12957\.0|79|BILLING|YES|
 |93|CKT-05688|350|Frankfurt DC2|Frankfurt DC1|Dark Fiber|BT|2018-09-12 00:00:00|2020-09-12 00:00:00|24|DECOM|INACTIVE|NaN|NaN|59|BILLING|YES|
+
 </br></br>
 
 ### Cost-saving Objective II: identify circuits that are potentially duplicate routes (the same product type, and A and Z locations)
@@ -178,6 +182,7 @@ First five rows of the dataframe ```cs```:
 |1495|CKT-02331|Amsterdam DC1|Frankfurt DC1|Internet DIA|true|
 |1520|CKT-07093|Amsterdam DC1|Frankfurt DC1|Internet DIA|true|
 |788|CKT-00486|Ashburn DC1|Singapore DC1|Cross Connect|true|
+
 </br></br>
 
 ### Cost-saving Objective III: identify circuits that are underused (utilization percentage > 20%)
@@ -194,6 +199,7 @@ First five rows of the dataframe ```cs```:
 |10|CKT-03037|4767|Amsterdam DC1|London DC1|Wave|Equinix|2022-09-25 00:00:00|2024-09-24 00:00:00|48|ACTIVE|ACTIVE|NaN|NaN|0|BILLING|false|YES|
 |12|CKT-09321|4340|Zurich DC1|Frankfurt DC2|Internet DIA|Lumen|2019-02-09 00:00:00|2022-02-08 00:00:00|60|ACTIVE|ACTIVE|NaN|NaN|8|BILLING|false|YES|
 |18|CKT-00754|150|Singapore DC1|Singapore DC1|Fiber|Telstra|2023-03-14 00:00:00|2025-03-13 00:00:00|60|DECOM|INACTIVE|NaN|NaN|11|NOT BILLED|false|YES|
+
 </br></br>
 
 
