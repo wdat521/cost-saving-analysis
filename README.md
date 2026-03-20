@@ -55,9 +55,11 @@ First five rows of the dataframe ```cs```:
 
 
 ### Data Preprocessing
-1. No empty values in columns circuit_id, a_end, z_end, product_type, supplier, start_date, monthly_recurring_cost, contract_termn_months, decom_status, and utilization_pct. Values are also in the smae format. Note that circuit_id doesn't have to be unique.
 
-2. The categories for column billing_status is shown as: 'ACTIVE BILLING', 'BILLING', 'Not Billed', 'billing'.
+    1. No empty values in columns circuit_id, a_end, z_end, product_type, supplier, start_date, monthly_recurring_cost, contract_termn_months, decom_status, and utilization_pct. Values are also in the smae format. Note that circuit_id doesn't have to be unique.
+
+
+     2. The categories for column billing_status is shown as: 'ACTIVE BILLING', 'BILLING', 'Not Billed', 'billing'.
 
 
 
@@ -67,8 +69,8 @@ First five rows of the dataframe ```cs```:
 
 
   
-   'ACTIVE BILLING', 'BILLING', and 'billing' are the same in meaning. Using python, the categories are then narrowed down into: 'BILLING' and 'NOT BILLED'.
-   I created a new column called clean_billing_status for the two categories and removed the billing_status column.
+       'ACTIVE BILLING', 'BILLING', and 'billing' are the same in meaning. Using python, the categories are then narrowed down into: 'BILLING' and 'NOT BILLED'.
+       I created a new column called clean_billing_status for the two categories and removed the billing_status column.
 
 
 
@@ -89,7 +91,7 @@ First five rows of the dataframe ```cs```:
 
 
 
- 3. A reclaim or credit note may be requested if the circuit was reqeusted for termination, the vendor acknowledged request, yet we are still being billed.
+    3. A reclaim or credit note may be requested if the circuit was reqeusted for termination, the vendor acknowledged request, yet we are still being billed.
     Using the accessor object **loc** in python, I selected the columns 'circuit_id','decom_status', 'service_status', and 'clean_billing_status. It can be said that the reclaim rows are logical.
 
 
@@ -111,7 +113,7 @@ First five rows of the dataframe ```cs```:
 
 
 
-4. The categories in service_status column are: 'Active', 'Inactive', 'Pending Disconnect','Provisioning', 'Suspended', 'active'. 
+    4. The categories in service_status column are: 'Active', 'Inactive', 'Pending Disconnect','Provisioning', 'Suspended', 'active'. 
 
 
 
@@ -131,7 +133,7 @@ First five rows of the dataframe ```cs```:
 
 
 
-5. It is notable that the columns start_date and end_date are not uniform in format.
+    5. It is notable that the columns start_date and end_date are not uniform in format.
 
 
 
