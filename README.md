@@ -4,13 +4,6 @@ Bad data can cost you millions, hence this project aims to identify and remove u
 ## 🧩 The Challenge 
 The company is spending roughly 30% of its annual budget for inventory networking services and equipment management. Due to the 3-5% price increase of our suppliers, we want to `strategically reduce the inventory budget from 30% to 10%`, factoring in capital, storage, insurance, and obsolescence. By the end of 2025, we want to save at least 1M USD.
 
-Below are strategies that could generate cost savings:
-  * Identify circuits that were requested for termination but are still being billed (customer services that are inactive, decommissioned inventory, yet still being billed by the vendor). 
-  * Identify circuits that are potentially duplicate routes (the same product type, and A and Z locations).
-  * Identify circuits that are underused (utilization percentage > 20%).
-  * Identify out of term contracts but are still being billed.
-
-
 ## 📊 Data Overview
 The dataset is simulated using ChatGPT, python, and my knowledge on networking/telecommunication inventory data.
 
@@ -137,13 +130,18 @@ First five rows of the dataframe ```cs```:
 - Data Type: bool
 
 `Data Analyses:`
+Below are strategies that could generate cost savings:
+  * Identify circuits that were requested for termination but are still being billed (customer services that are inactive, decommissioned inventory, yet still being billed by the vendor). 
+  * Identify circuits that are potentially duplicate routes (the same product type, and A and Z locations).
+  * Identify circuits that are underused (utilization percentage > 20%).
+  * Identify out of term contracts but are still being billed.
+
 ### Cost-Saving Objective I: Identify circuits that were requested for termination but are still being billed (services that are inactive, decommissioned, but are still being billed)
 
 <img width="1759" height="120" alt="image" src="https://github.com/user-attachments/assets/b8976f27-13e1-44b1-a6a6-598aa343d199" />
 </br></br>
 
    Flagging rows that are cost savings (decom_status = DECOM, billing_status = BILLING, service_status = INACTIVE) using the **function .map** in python pandas.
-</br></br>
 
 <img width="1735" height="267" alt="image" src="https://github.com/user-attachments/assets/a49de918-5a48-4090-a3d5-0fcda72cec73" />
 </br></br>
