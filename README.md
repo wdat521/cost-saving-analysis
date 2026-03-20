@@ -131,7 +131,7 @@ First five rows of the dataframe ```cs```:
 
 `Data Analyses:`
 
-### Cost-Saving Objective I: Identify Circuits That Are Use For Inactive Customer Project
+### Cost-Saving Objective I: Identify Circuits That Are Use For Inactive Customer Service
 
    Flagging rows that are cost savings (decom_status = ACTIVE, billing_status = BILLING, service_status = INACTIVE) using the **function .map** in python pandas.
 
