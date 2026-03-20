@@ -66,7 +66,6 @@ First five rows of the dataframe ```cs```:
 
 <img width="1760" height="437" alt="image" src="https://github.com/user-attachments/assets/cdf88c22-36b4-4bd0-8871-19d9f4c6b665" />
 
-
 |index|circuit\_id|monthly\_recurring\_cost|a\_end|z\_end|product\_type|supplier|start\_date|end\_date|contract\_term\_months|billing\_status|decom\_status|service\_status|reclaim|reclaim\_total|utilization\_pct|clean\_billing\_status|
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 |0|CKT-07237|2824|Dallas DC1|London DC2|Internet DIA|Orange|13-11-22|12-11-27|36|BILLING|PENDING DECOM|Provisioning|NaN|NaN|34|BILLING|
@@ -143,8 +142,6 @@ First five rows of the dataframe ```cs```:
 ### Cost-saving Objective I: Identify circuits that were requested for termination but are still being billed (services that are inactive, decommissioned, but are still being billed)
 
 <img width="1759" height="120" alt="image" src="https://github.com/user-attachments/assets/b8976f27-13e1-44b1-a6a6-598aa343d199" />
-</br>
-</br>
 
    Flagging rows that are cost savings (decom_status = DECOM, billing_status = BILLING, service_status = INACTIVE) using the **function .map** in python pandas.
 
@@ -178,6 +175,7 @@ First five rows of the dataframe ```cs```:
 ### Cost-saving Objective III: identify circuits that are underused (utilization percentage > 20%)
 
    Flagging underused circuits:
+   
 <img width="1752" height="169" alt="image" src="https://github.com/user-attachments/assets/83a31c65-0a15-489b-a9b4-a1292201efa6" />
 
 |index|circuit\_id|monthly\_recurring\_cost|a\_end|z\_end|product\_type|supplier|start\_date|end\_date|contract\_term\_months|decom\_status|service\_status|reclaim|reclaim\_total|utilization\_pct|clean\_billing\_status|duplicate\_route\_flag|underused|
@@ -201,7 +199,6 @@ First five rows of the dataframe ```cs```:
 |---|---|---|---|
 |0|CKT-07237|2022-11-13 00:00:00|2027-12-11 00:00:00|
 
-
    Further investigation on contract terms is highly recommended.
 
 
@@ -214,6 +211,8 @@ The top three suppliers where we cut the most costs are BT, Orange, and Telstra.
 The top three products that we have spent the most are Wave, DIA, and Metro Fiber. This could be interesting for the procurement team.
 
 <img width="1417" height="797" alt="image" src="https://github.com/user-attachments/assets/bc907b4c-860a-4db8-90fa-53b99904de03" />
+
+**Issue Tree Diagram:**
 
 <p> align="center"> 
  <img width="664" height="543" alt="image" src="https://github.com/user-attachments/assets/644a480d-bc8b-4364-97bc-c2e7502a286e" />
