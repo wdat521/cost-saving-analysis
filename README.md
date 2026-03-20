@@ -139,7 +139,7 @@ First five rows of the dataframe ```cs```:
 - Columns: 1
 - Data Type: bool
 
-
+## Data Analyses
 ### Cost-saving Objective I: Identify circuits that were requested for termination but are still being billed (services that are inactive, decommissioned, but are still being billed)
 
 <img width="1759" height="120" alt="image" src="https://github.com/user-attachments/assets/b8976f27-13e1-44b1-a6a6-598aa343d199" />
