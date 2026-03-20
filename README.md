@@ -199,7 +199,7 @@ First five rows of the dataframe ```cs```:
 
 The project generated a 1.02M USD of cost savings, and consequently reclaimd 33.3K USD. 
 
-The top three suppliers where we cut the most costs are BT, Orange, and Telstra. This would imply a call to closely monitor our termination requests with those suppliers.
+The top three suppliers where we cut the most costs are NTT, Verizon, and Telstra. This would imply a call to closely monitor our termination requests with those suppliers.
 
 The top three products that we have spent the most are Wave, DIA, and Metro Fiber. This could be interesting for the procurement team.
 
