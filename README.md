@@ -39,8 +39,8 @@ The dataset is simulated using ChatGPT and python. my knowledge on networking/te
 |10 | decom_status | 2120 non-null | object |
 |11 | service_status | 2120 non-null │ object|
 df: float64(1), int64(3), object(11)
-</br>
-</br>
+
+
 First five rows of the dataframe ```cs```:
 |index|circuit\_id|monthly\_recurring\_cost|a\_end|z\_end|product\_type|supplier|start\_date|end\_date|contract\_term\_months|billing\_status|decom\_status|service\_status|reclaim|reclaim\_total|utilization\_pct|
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
@@ -59,14 +59,14 @@ First five rows of the dataframe ```cs```:
 
 2. The categories for column billing_status is shown as: 'ACTIVE BILLING', 'BILLING', 'Not Billed', 'billing'.
 
-   <img width="1759" height="118" alt="image" src="https://github.com/user-attachments/assets/fda8be86-cd1c-430b-a226-6f2ed2c268e8" />
+<img width="1759" height="118" alt="image" src="https://github.com/user-attachments/assets/fda8be86-cd1c-430b-a226-6f2ed2c268e8" />
 
    'ACTIVE BILLING', 'BILLING', and 'billing' are the same in meaning. Using python, the categories are then narrowed down into: 'BILLING' and 'NOT BILLED'.
     I created a new column called clean_billing_status for the two categories and removed the billing_status column.
 
- <img width="1760" height="437" alt="image" src="https://github.com/user-attachments/assets/cdf88c22-36b4-4bd0-8871-19d9f4c6b665" />
-</br
-</br>
+<img width="1760" height="437" alt="image" src="https://github.com/user-attachments/assets/cdf88c22-36b4-4bd0-8871-19d9f4c6b665" />
+
+
 |index|circuit\_id|monthly\_recurring\_cost|a\_end|z\_end|product\_type|supplier|start\_date|end\_date|contract\_term\_months|billing\_status|decom\_status|service\_status|reclaim|reclaim\_total|utilization\_pct|clean\_billing\_status|
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 |0|CKT-07237|2824|Dallas DC1|London DC2|Internet DIA|Orange|13-11-22|12-11-27|36|BILLING|PENDING DECOM|Provisioning|NaN|NaN|34|BILLING|
@@ -74,14 +74,12 @@ First five rows of the dataframe ```cs```:
 |2|CKT-02822|1316|London DC1|Tokyo DC1|Wave|Orange|2021/11/16|2024-11-15|36|billing|DECOM|Active|NaN|NaN|55|BILLING|
 |3|CKT-07997|4564|Zurich DC1|Amsterdam DC1|Metro Fiber|BT|28-01-21|NaN|36|BILLING|ACTIVE|Pending Disconnect|NaN|NaN|94|BILLING|
 |4|CKT-03339|150|Tokyo DC1|London DC1|Cross Connect|Lumen|2021/09/24|23-09-26|60|BILLING|PENDING DECOM|Provisioning|NaN|NaN|61|BILLING|
-</br>
-</br>
+
 3. A reclaim or credit note may be requested if the circuit was reqeusted for termination, the vendor acknowledged request, yet we are still being billed.
    Using the accessor object **loc** in python, I selected the columns 'circuit_id','decom_status', 'service_status', and 'clean_billing_status. It can be said that the reclaim rows are logical.
 
 <img width="1757" height="241" alt="image" src="https://github.com/user-attachments/assets/68209407-ef5b-496b-9f1d-2d5fd4c8d872" />
-</br>
-</br>
+
 
 |index|circuit\_id|decom\_status|service\_status|clean\_billing\_status|
 |---|---|---|---|---|
@@ -90,8 +88,7 @@ First five rows of the dataframe ```cs```:
 |194|CKT-07283|DECOM|Inactive|BILLING|
 |314|CKT-08592|DECOM|Inactive|BILLING|
 |327|CKT-08965|DECOM|Inactive|BILLING|
-</br>
-</br>
+
 
 4. The categories in service_status column are: 'Active', 'Inactive', 'Pending Disconnect','Provisioning', 'Suspended', 'active'.
    
@@ -100,13 +97,11 @@ First five rows of the dataframe ```cs```:
    'Active' and 'active' are the same. To fix this, I formatted the categories to uppercase using the str.upper() method in pandas python:
 
  <img width="1757" height="149" alt="image" src="https://github.com/user-attachments/assets/1f2c5625-33d2-4a63-b679-da4e88e28613" />
-</br>
-</br>
+
 5. It is notable that the columns start_date and end_date are not uniform in format.
 
 <img width="1759" height="221" alt="image" src="https://github.com/user-attachments/assets/dc773543-e72b-44f4-a1cc-56f7e8c18fca" />
-</br>
-</br>
+
 
 |index|start\_date|end\_date|
 |---|---|---|
@@ -116,7 +111,6 @@ First five rows of the dataframe ```cs```:
 |3|2021-01-28 00:00:00|NaT|
 |4|2021-09-24 00:00:00|2026-09-23 00:00:00|
 
-</br>
 
    There are also empty cells in the end_date. We can fill these in by adding the contract term in months to the start date.
  
@@ -125,8 +119,6 @@ First five rows of the dataframe ```cs```:
 
 <img width="1752" height="318" alt="image" src="https://github.com/user-attachments/assets/c7fd36f4-825b-449f-b093-adc161302ce1" />
 
-</br>
-</br>
 
 | Index | End Date | 
 |-------|----------|
@@ -148,8 +140,6 @@ First five rows of the dataframe ```cs```:
 - Data Type: bool
 
 
-
-
 ### Cost-saving Objective I: Identify circuits that were requested for termination but are still being billed (services that are inactive, decommissioned, but are still being billed)
 
 <img width="1759" height="120" alt="image" src="https://github.com/user-attachments/assets/b8976f27-13e1-44b1-a6a6-598aa343d199" />
@@ -159,8 +149,7 @@ First five rows of the dataframe ```cs```:
    Flagging rows that are cost savings (decom_status = DECOM, billing_status = BILLING, service_status = INACTIVE) using the **function .map** in python pandas.
 
 <img width="1735" height="267" alt="image" src="https://github.com/user-attachments/assets/a49de918-5a48-4090-a3d5-0fcda72cec73" />
-</br>
-</br>
+
 |index|circuit\_id|monthly\_recurring\_cost|a\_end|z\_end|product\_type|supplier|start\_date|end\_date|contract\_term\_months|decom\_status|service\_status|reclaim|reclaim\_total|utilization\_pct|clean\_billing\_status|cost\_saving|
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 |44|CKT-00705|2565|Singapore DC1|London DC1|Wave|Verizon|2017-12-02 00:00:00|2019-02-12 00:00:00|36|DECOM|INACTIVE|YES|30780\.0|49|BILLING|YES|
@@ -168,15 +157,15 @@ First five rows of the dataframe ```cs```:
 |79|CKT-09319|150|Singapore DC1|Tokyo DC1|Dark Fiber|Lumen|2018-09-03 00:00:00|2021-09-03 00:00:00|36|DECOM|INACTIVE|NaN|NaN|93|BILLING|YES|
 |84|CKT-09044|300|Ashburn DC1|New York DC1|Fiber|BT|2019-11-28 00:00:00|2022-11-28 00:00:00|36|DECOM|INACTIVE|YES|12957\.0|79|BILLING|YES|
 |93|CKT-05688|350|Frankfurt DC2|Frankfurt DC1|Dark Fiber|BT|2018-09-12 00:00:00|2020-09-12 00:00:00|24|DECOM|INACTIVE|NaN|NaN|59|BILLING|YES|
-</br>
-</br>
+
+
 ### Cost-saving Objective II: identify circuits that are potentially duplicate routes (the same product type, and A and Z locations)
 
    decom_status = ACTIVE, clean_billing_status = BILLING, service_status = ACTIVE and PROVISIONING)
 
 <img width="1758" height="616" alt="image" src="https://github.com/user-attachments/assets/ed50b48d-8da6-4485-92f0-1c84579c7cb4" />
-</br>
-</br>
+
+
 |index|circuit\_id|a\_end|z\_end|product\_type|duplicate\_route\_flag|
 |---|---|---|---|---|---|
 |545|CKT-07155|Amsterdam DC1|Frankfurt DC1|Internet DIA|true|
@@ -184,15 +173,14 @@ First five rows of the dataframe ```cs```:
 |1495|CKT-02331|Amsterdam DC1|Frankfurt DC1|Internet DIA|true|
 |1520|CKT-07093|Amsterdam DC1|Frankfurt DC1|Internet DIA|true|
 |788|CKT-00486|Ashburn DC1|Singapore DC1|Cross Connect|true|
-</br>
-</br>
+
+
 ### Cost-saving Objective III: identify circuits that are underused (utilization percentage > 20%)
 
    Flagging underused circuits:
-
+</br>
 <img width="1752" height="169" alt="image" src="https://github.com/user-attachments/assets/83a31c65-0a15-489b-a9b4-a1292201efa6" />
-</br>
-</br>
+
 |index|circuit\_id|monthly\_recurring\_cost|a\_end|z\_end|product\_type|supplier|start\_date|end\_date|contract\_term\_months|decom\_status|service\_status|reclaim|reclaim\_total|utilization\_pct|clean\_billing\_status|duplicate\_route\_flag|underused|
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 |6|CKT-01735|350|Frankfurt DC1|New York DC1|Cross Connect|Lumen|2022-07-05 00:00:00|2025-04-07 00:00:00|24|TERMINATION REQUESTED|PENDING DISCONNECT|NaN|NaN|13|NOT BILLED|false|YES|
@@ -205,8 +193,7 @@ First five rows of the dataframe ```cs```:
 ### Cost-saving Objective IV: identify out of term contracts but are still being billed to reassess usability.
 
 <img width="1762" height="73" alt="image" src="https://github.com/user-attachments/assets/936f03de-3681-427d-9921-796aa0e7ee54" />
-</br>
-</br>
+
    Upon closer look, inconsistencies are detected in the end_date and contract_term_months columns.
    As an example, circuit CKT-07237 with both start and end dates value from the start, started on 2022-11-13. With a 36 contract term in months, it should have ended on 2025-11-13, but it shows 2027-12-11 instead.
 
@@ -214,8 +201,8 @@ First five rows of the dataframe ```cs```:
 |index|circuit\_id|start\_date|end\_date|
 |---|---|---|---|
 |0|CKT-07237|2022-11-13 00:00:00|2027-12-11 00:00:00|
-</br>
-</br>
+
+
    Further investigation on contract terms is highly recommended.
 
 
@@ -227,13 +214,12 @@ The project generated a 1.5M USD of cost savings, and consequently reclaimd 143K
 The top three suppliers where we cut the most costs are BT, Orange, and Telstra. This would imply a call to closely monitor our termination requests with those suppliers.
 
 The top three products that we have spent the most are Wave, DIA, and Metro Fiber. This could be interesting for the procurement team.
-</br>
 <img width="1417" height="797" alt="image" src="https://github.com/user-attachments/assets/bc907b4c-860a-4db8-90fa-53b99904de03" />
 </br>
+
 <p> align="center"> 
  <img width="664" height="543" alt="image" src="https://github.com/user-attachments/assets/644a480d-bc8b-4364-97bc-c2e7502a286e" />
 </p>
-</br>
 
 ## 📈 Recommendations
 
