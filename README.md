@@ -76,7 +76,7 @@ First five rows of the dataframe ```cs```:
 |3|CKT-07997|4564|Zurich DC1|Amsterdam DC1|Metro Fiber|BT|28-01-21|NaN|36|BILLING|ACTIVE|Pending Disconnect|NaN|NaN|94|BILLING|
 |4|CKT-03339|150|Tokyo DC1|London DC1|Cross Connect|Lumen|2021/09/24|23-09-26|60|BILLING|PENDING DECOM|Provisioning|NaN|NaN|61|BILLING|
 
-</br></br>
+</br>
 
 3. A reclaim or credit note may be requested if the circuit was reqeusted for termination, the vendor acknowledged request, yet we are still being billed.
    Using the accessor object **loc** in python, I selected the columns 'circuit_id','decom_status', 'service_status', and 'clean_billing_status. It can be said that the reclaim rows are logical.
@@ -92,7 +92,7 @@ First five rows of the dataframe ```cs```:
 |314|CKT-08592|DECOM|Inactive|BILLING|
 |327|CKT-08965|DECOM|Inactive|BILLING|
 
-</br></br>
+</br>
 
 4. The categories in service_status column are: 'Active', 'Inactive', 'Pending Disconnect','Provisioning', 'Suspended', 'active'.
    
@@ -102,7 +102,7 @@ First five rows of the dataframe ```cs```:
    'Active' and 'active' are the same. To fix this, I formatted the categories to uppercase using the str.upper() method in pandas python:
 
  <img width="1757" height="149" alt="image" src="https://github.com/user-attachments/assets/1f2c5625-33d2-4a63-b679-da4e88e28613" />
-</br></br>
+</br>
 
 5. It is notable that the columns start_date and end_date are not uniform in format.
 
@@ -147,6 +147,7 @@ First five rows of the dataframe ```cs```:
 - Data Type: bool
 
 ## Data Analyses
+
 ### Cost-saving Objective I: Identify circuits that were requested for termination but are still being billed (services that are inactive, decommissioned, but are still being billed)
 
 <img width="1759" height="120" alt="image" src="https://github.com/user-attachments/assets/b8976f27-13e1-44b1-a6a6-598aa343d199" />
@@ -167,6 +168,7 @@ First five rows of the dataframe ```cs```:
 |93|CKT-05688|350|Frankfurt DC2|Frankfurt DC1|Dark Fiber|BT|2018-09-12 00:00:00|2020-09-12 00:00:00|24|DECOM|INACTIVE|NaN|NaN|59|BILLING|YES|
 
 </br>
+
 ### Cost-saving Objective II: identify circuits that are potentially duplicate routes (the same product type, and A and Z locations)
 
    decom_status = ACTIVE, clean_billing_status = BILLING, service_status = ACTIVE and PROVISIONING)
@@ -183,6 +185,7 @@ First five rows of the dataframe ```cs```:
 |788|CKT-00486|Ashburn DC1|Singapore DC1|Cross Connect|true|
 
 </br>
+
 ### Cost-saving Objective III: identify circuits that are underused (utilization percentage > 20%)
 
    Flagging underused circuits:
@@ -199,6 +202,7 @@ First five rows of the dataframe ```cs```:
 |18|CKT-00754|150|Singapore DC1|Singapore DC1|Fiber|Telstra|2023-03-14 00:00:00|2025-03-13 00:00:00|60|DECOM|INACTIVE|NaN|NaN|11|NOT BILLED|false|YES|
 
 </br>
+
 ### Cost-saving Objective IV: identify out of term contracts but are still being billed to reassess usability.
 
 <img width="1762" height="73" alt="image" src="https://github.com/user-attachments/assets/936f03de-3681-427d-9921-796aa0e7ee54" />
