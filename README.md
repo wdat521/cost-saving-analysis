@@ -135,7 +135,7 @@ First five rows of the dataframe ```cs```:
 
    Flagging rows that are cost savings (decom_status = ACTIVE, billing_status = BILLING, service_status = INACTIVE) using the **function .map** in python pandas.
 
-<img width="1427" height="171" alt="image" src="https://github.com/user-attachments/assets/2fd651c4-934d-4689-842a-8cf53f6a1633" />
+<img width="1434" height="276" alt="image" src="https://github.com/user-attachments/assets/3a5db5bc-cdac-4421-82e7-1458461e442e" />
 </br></br>
 
 |index|circuit\_id|monthly\_recurring\_cost|a\_end|z\_end|product\_type|supplier|start\_date|end\_date|contract\_term\_months|decom\_status|service\_status|reclaim|reclaim\_total|utilization\_pct|clean\_billing\_status|cost\_saving|
