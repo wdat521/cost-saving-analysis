@@ -1,9 +1,9 @@
 # 📌Network Inventory Cost Saving Analysis
-This project focuses on identifying unnecessary networking inventory costs.
+## Bad data can cost you millions hence this project aims to identify and remove unnecessary networking inventory costs.
 
 
 ## 🧩 The Challenge 
-The company is spending roughly 30% of its annual budget for inventory networking services and equipment management. Due to the 3-5% price increase of our suppliers, we want to strategically reduce the inventory budget to 10%, factoring in capital, storage, insurance, and obsolescence. By the end of 2026, we want to save at least 1M USD.
+The company is spending roughly 30% of its annual budget for inventory networking services and equipment management. Due to the 3-5% price increase of our suppliers, we want to **strategically reduce the inventory budget from 30% to 10%**, factoring in capital, storage, insurance, and obsolescence. By the end of 2026, we want to save at least 1M USD.
 
 Below are strategies that could generate cost savings:
   * Identify circuits that were requested for termination but are still being billed (customer services that are inactive, decommissioned inventory, yet still being billed by the vendor). 
@@ -12,8 +12,8 @@ Below are strategies that could generate cost savings:
   * Identify out of term contracts but are still being billed.
 
 
-## 📊 Dataframe 'cs' Overview
-The dataset is simulated using python and ChatGPT.
+## 📊 Data Overview
+The dataset is simulated using ChatGPT and python. my knowledge on networking/telecommunication.
 
 **Type:** `pandas.core.frame.DataFrame`
 
@@ -49,13 +49,14 @@ First five rows of the dataframe ```cs```:
 
 
 ## ⚙️ Methodology
-**Tools Used:**
-* Python for data preprocessing and exploratory data analysis
-* Power BI for visualization
+
 
 ### Data Preprocessing
-* No empty values in columns circuit_id, a_end, z_end, product_type, supplier, start_date, monthly_recurring_cost, contract_termn_months, decom_status, and utilization_pct. Values are also in the smae format. Note that circuit_id doesn't have to be unique.
-* The categories for column billing_status is shown as: 'ACTIVE BILLING', 'BILLING', 'Not Billed', 'billing'. Categories 'ACTIVE BILLING', 'BILLING', and , 'billing' are the same in meaning. The categories can be narrowed down into: 'BILLING' and 'NOT BILLED'. I created a new column called clean_billing_status consisting the two categories and removed the billing_status column.
+1. No empty values in columns circuit_id, a_end, z_end, product_type, supplier, start_date, monthly_recurring_cost, contract_termn_months, decom_status, and utilization_pct. Values are also in the smae format. Note that circuit_id doesn't have to be unique.
+
+2. The categories for column billing_status is shown as: 'ACTIVE BILLING', 'BILLING', 'Not Billed', 'billing'.
+  
+Categories 'ACTIVE BILLING', 'BILLING', and , 'billing' are the same in meaning. The categories can be narrowed down into: 'BILLING' and 'NOT BILLED'. I created a new column called clean_billing_status consisting the two categories and removed the billing_status column.
 
 
 <img width="1424" height="269" alt="image" src="https://github.com/user-attachments/assets/484d8c4b-67a9-4a39-9761-93320b94dd9d" />
