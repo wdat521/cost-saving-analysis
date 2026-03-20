@@ -76,13 +76,11 @@ First five rows of the dataframe ```cs```:
 |3|CKT-07997|4564|Zurich DC1|Amsterdam DC1|Metro Fiber|BT|28-01-21|NaN|36|BILLING|ACTIVE|Pending Disconnect|NaN|NaN|94|BILLING|
 |4|CKT-03339|150|Tokyo DC1|London DC1|Cross Connect|Lumen|2021/09/24|23-09-26|60|BILLING|PENDING DECOM|Provisioning|NaN|NaN|61|BILLING|
 
-</br>
-
 3. A reclaim or credit note may be requested if the circuit was reqeusted for termination, the vendor acknowledged request, yet we are still being billed.
    Using the accessor object **loc** in python, I selected the columns 'circuit_id','decom_status', 'service_status', and 'clean_billing_status. It can be said that the reclaim rows are logical.
 
 <img width="1757" height="241" alt="image" src="https://github.com/user-attachments/assets/68209407-ef5b-496b-9f1d-2d5fd4c8d872" />
-</br></br>
+</br>
 
 |index|circuit\_id|decom\_status|service\_status|clean\_billing\_status|
 |---|---|---|---|---|
@@ -97,7 +95,7 @@ First five rows of the dataframe ```cs```:
 4. The categories in service_status column are: 'Active', 'Inactive', 'Pending Disconnect','Provisioning', 'Suspended', 'active'.
    
 <img width="1755" height="193" alt="image" src="https://github.com/user-attachments/assets/f6881882-5084-4e03-a78c-f0ab40499095" />
-</br></br>
+</br>
 
    'Active' and 'active' are the same. To fix this, I formatted the categories to uppercase using the str.upper() method in pandas python:
 
@@ -108,7 +106,7 @@ First five rows of the dataframe ```cs```:
 5. It is notable that the columns start_date and end_date are not uniform in format.
 
 <img width="1759" height="221" alt="image" src="https://github.com/user-attachments/assets/dc773543-e72b-44f4-a1cc-56f7e8c18fca" />
-</br></br>
+</br>
 
 |index|start\_date|end\_date|
 |---|---|---|
@@ -118,7 +116,7 @@ First five rows of the dataframe ```cs```:
 |3|2021-01-28 00:00:00|NaT|
 |4|2021-09-24 00:00:00|2026-09-23 00:00:00|
 
-</br></br>
+</br>
 
    There are also empty cells in the end_date. We can fill these in by adding the contract term in months to the start date.
  
