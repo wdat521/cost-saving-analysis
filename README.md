@@ -200,7 +200,7 @@ First five rows of the dataframe ```cs```:
 
 ## 💡 Insights
 
-The project generated a 1.52M USD of cost savings, and consequently reclaimd 143K USD. 
+The project generated a 1.02M USD of cost savings, and consequently reclaimd 33.3K USD. 
 
 The top three suppliers where we cut the most costs are BT, Orange, and Telstra. This would imply a call to closely monitor our termination requests with those suppliers.
 
@@ -208,7 +208,8 @@ The top three products that we have spent the most are Wave, DIA, and Metro Fibe
 
 Underutilized circuits are also indicated along with the possible duplicate circuits with respective to their route and product type. This could be interesting for the network engineer team.
 
-<img width="1417" height="797" alt="image" src="https://github.com/user-attachments/assets/bc907b4c-860a-4db8-90fa-53b99904de03" />
+<img width="1565" height="892" alt="image" src="https://github.com/user-attachments/assets/e0437fda-2815-4a97-bcd0-cbd23fef3fef" />
+
 
 **Issue Tree Diagram:**
 
