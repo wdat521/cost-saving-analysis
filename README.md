@@ -2,7 +2,7 @@
 Bad data can cost you millions, hence this project aims to identify and remove unnecessary costs by examining our network inventory.
 
 ## 🧩 Problem Statement 
-The company is spending roughly 30% of its annual budget for inventory networking services and equipment management. Due to the 3-5% price increase of our suppliers, we want to `strategically reduce the inventory budget from 30% to 10%`, factoring in capital, storage, insurance, and obsolescence. By the end of 2025, we want to save at least 1M USD.
+Due to the lack of internal standard operating process bfore, there are circuits that have been requested for termination that are still being paid up until now. By the end of 2025, we want to save at least 1M USD by identifying those active but unused circuits.
 
 ## 📊 Data Overview
 The dataset is simulated using ChatGPT, python, and my knowledge of networking/telecommunication inventory data.
